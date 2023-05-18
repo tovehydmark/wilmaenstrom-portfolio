@@ -1,3 +1,23 @@
-* {
+//This file contains all styling specific for tablet (min-width: 700px)
+
+main {
   background-color: orange;
+}
+
+nav {
+  width: 80%;
+  margin: 30px auto;
+
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    li {
+      font-size: 1.5rem;
+      a {
+        text-decoration: none;
+      }
+    }
+  }
 }

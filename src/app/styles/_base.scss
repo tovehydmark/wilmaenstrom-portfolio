@@ -1,0 +1,11 @@
+//This file contains all styling that is common for all screen sizes, mobile first
+
+header {
+  height: 250px;
+  background-color: rgb(228, 228, 228);
+
+  text-align: center;
+  h1 {
+    padding-top: 100px;
+  }
+}
