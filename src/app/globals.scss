@@ -1,0 +1,13 @@
+* {
+  margin: 0;
+}
+
+/* Tablet */
+@media (min-width: 700px) {
+  @import './styles/tablet';
+}
+
+/* Desktop */
+@media (min-width: 1120px) {
+  @import './styles/desktop';
+}
