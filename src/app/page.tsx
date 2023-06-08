@@ -6,11 +6,9 @@ import Illustrations from '@/pages/illustrations';
 export default function Home() {
   return (
     <>
-      <Header></Header>
       <main className={styles.main}>
         <Illustrations></Illustrations>
       </main>
-      <Footer></Footer>
     </>
   );
 }
