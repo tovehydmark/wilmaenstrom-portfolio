@@ -1,7 +1,11 @@
+import Layout from '@/app/layout';
+
 const Illustrations = () => {
   return (
     <>
-      <h1>Wilmas illustrationer</h1>
+      <Layout>
+        <h1>Wilmas illustrationer</h1>
+      </Layout>
     </>
   );
 };

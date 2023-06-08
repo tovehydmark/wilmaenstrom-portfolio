@@ -1,29 +1,11 @@
-// import Header from '@/app/components/Header';
-// import RootLayout from '@/app/layout';
-
-// const About = () => {
-//   return (
-//     <>
-//       <RootLayout>
-//         {/* <Header></Header> */}
-//         <h1>Om Wilma</h1>
-//         {/* <footer></footer> */}
-//       </RootLayout>
-//     </>
-//   );
-// };
-
-// export default About;
-import Header from '@/app/components/Header';
-import RootLayout from '@/app/layout';
+import Layout from '@/app/components/layout';
 
 const About = () => {
   return (
     <>
-      <RootLayout>
-        <Header />
+      <Layout>
         <h1>Om Wilma</h1>
-      </RootLayout>
+      </Layout>
     </>
   );
 };
