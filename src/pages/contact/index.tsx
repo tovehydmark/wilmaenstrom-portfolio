@@ -1,13 +1,11 @@
-import Footer from '@/app/components/Footer';
-import Header from '@/app/components/Header';
+import Layout from '@/app/components/layout';
 
 const Contact = () => {
   return (
     <>
-      <Header></Header>
-
-      <h1>Wilmas kontaktsida</h1>
-      <Footer></Footer>
+      <Layout>
+        <h1>Wilmas kontaktsida</h1>
+      </Layout>
     </>
   );
 };

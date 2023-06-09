@@ -11,7 +11,7 @@ const Navigation = () => {
           <Link href="/about">Om mig</Link>
         </li>
         <li>
-          <Link href="/contact">Blogg</Link>
+          <Link href="/contact">Kontakt</Link>
         </li>
       </ul>
     </nav>

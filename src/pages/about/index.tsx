@@ -1,7 +1,11 @@
+import Layout from '@/app/components/layout';
+
 const About = () => {
   return (
     <>
-      <h1>Om Wilma</h1>
+      <Layout>
+        <h1>Om Wilma</h1>
+      </Layout>
     </>
   );
 };

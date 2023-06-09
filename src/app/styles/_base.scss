@@ -1,11 +1,24 @@
 //This file contains all styling that is common for all screen sizes, mobile first
 
 header {
-  height: 250px;
+  height: 200px;
   background-color: rgb(228, 228, 228);
 
   text-align: center;
   h1 {
-    padding-top: 100px;
+    padding-top: 50px;
   }
+}
+.illustration-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.illustration {
+  width: 80%;
+  height: 180px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 5px;
 }
