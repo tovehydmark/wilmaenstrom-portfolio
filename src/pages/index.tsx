@@ -1,9 +1,11 @@
-const Illustrations = () => {
+import Illustrations from './illustrations';
+
+const HomePage = () => {
   return (
     <>
-      <h1>Wilmas illustrationer</h1>
+      <Illustrations></Illustrations>
     </>
   );
 };
 
-export default Illustrations;
+export default HomePage;
