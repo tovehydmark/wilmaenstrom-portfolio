@@ -12,8 +12,30 @@ const Illustrations = () => {
     { src: '/image7', name: 'image7' },
     { src: '/image8', name: 'image8' },
   ];
+
+  const postImageString = async () => {
+    //Todo: change body to what should be uploaded
+    const body = 'BIBIB';
+
+    try {
+      let response = await fetch('/api/postImage', {
+        method: 'POST',
+        body: JSON.stringify(body),
+
+        headers: {
+          Accept: 'application/json, text/plain, */*',
+          'Content-Type': 'application/json',
+        },
+      });
+      response = await response.json();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
+      <button onClick={postImageString}>Posta</button>
       <div className="illustration-container">
         {images.map((image) => {
           return (
