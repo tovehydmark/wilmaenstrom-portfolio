@@ -1,7 +1,13 @@
 import Layout from '@/app/layout';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 const Illustrations = () => {
+  const [imagesFromDb, setImagesFromDb] = useState();
+
+  useEffect(() => {
+    getImageInfo();
+  }, []);
   const images = [
     { src: '/image1', name: 'image1' },
     { src: '/image2', name: 'image2' },
@@ -32,6 +38,24 @@ const Illustrations = () => {
       console.log(error);
     }
   };
+
+  // WIP get
+  // const getImageInfo = async () => {
+  //   try {
+  //     let response = await fetch('/api/postImage', {
+  //       method: 'GET',
+  //       headers: {
+  //         Accept: 'application/json, text/plain, */*',
+  //         'Content-Type': 'application/json',
+  //       },
+  //     });
+  //     // response = await response.json();
+
+  //     console.log('response', response);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <>
