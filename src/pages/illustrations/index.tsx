@@ -1,21 +1,25 @@
 import Layout from '@/app/layout';
 import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
 const Illustrations = () => {
-  const images = [
-    { src: '/image1', name: 'image1' },
-    { src: '/image2', name: 'image2' },
-    { src: '/image3', name: 'image3' },
-    { src: '/image4', name: 'image4' },
-    { src: '/image5', name: 'image5' },
-    { src: '/image6', name: 'image6' },
-    { src: '/image7', name: 'image7' },
-    { src: '/image8', name: 'image8' },
-  ];
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        let response = await fetch('/api/getImages');
+        let data = await response.json();
+
+        setImages(data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
 
   const postImageString = async () => {
-    //Todo: change body to what should be uploaded
-    const body = 'BIBIB';
+    const body = { title: 'BIBIB', src: '12343234312dfd' };
 
     try {
       let response = await fetch('/api/postImage', {
@@ -40,9 +44,9 @@ const Illustrations = () => {
         {images.map((image) => {
           return (
             <Image
-              key={image.src}
+              key={image._id}
               src={image.src}
-              alt={image.name}
+              alt={image.title}
               width={80}
               height={80}
               className="illustration"
