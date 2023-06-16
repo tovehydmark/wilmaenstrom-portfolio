@@ -3,24 +3,22 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 const Illustrations = () => {
-  const [imagesFromDb, setImagesFromDb] = useState();
+  const [images, setImages] = useState([]);
 
   useEffect(() => {
-    getImageInfo();
+    (async () => {
+      try {
+        let response = await fetch('/api/getImages');
+        let data = await response.json();
+
+        setImages(data);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
   }, []);
-  const images = [
-    { src: '/image1', name: 'image1' },
-    { src: '/image2', name: 'image2' },
-    { src: '/image3', name: 'image3' },
-    { src: '/image4', name: 'image4' },
-    { src: '/image5', name: 'image5' },
-    { src: '/image6', name: 'image6' },
-    { src: '/image7', name: 'image7' },
-    { src: '/image8', name: 'image8' },
-  ];
 
   const postImageString = async () => {
-    //Todo: change body to what should be uploaded
     const body = 'BIBIB';
 
     try {
@@ -38,24 +36,6 @@ const Illustrations = () => {
       console.log(error);
     }
   };
-
-  // WIP get
-  // const getImageInfo = async () => {
-  //   try {
-  //     let response = await fetch('/api/postImage', {
-  //       method: 'GET',
-  //       headers: {
-  //         Accept: 'application/json, text/plain, */*',
-  //         'Content-Type': 'application/json',
-  //       },
-  //     });
-  //     // response = await response.json();
-
-  //     console.log('response', response);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   return (
     <>

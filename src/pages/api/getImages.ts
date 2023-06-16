@@ -1,19 +1,19 @@
 import clientPromise from '@/app/lib/mongodb';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-export async function postImage(req: NextApiRequest, res: NextApiResponse) {
+export async function getImages(req: NextApiRequest, res: NextApiResponse) {
   try {
     const client = await clientPromise;
     const db = client.db('wilma-portfolio');
-    const image = req.body;
+    const collection = db.collection('images');
 
-    const result = await db.collection('images').insertOne({ title: image });
+    const images = await collection.find().toArray();
 
-    res.json(result);
+    res.json(images);
   } catch (e) {
     console.error(e);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 }
 
-export default postImage;
+export default getImages;
