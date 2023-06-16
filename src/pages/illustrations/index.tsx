@@ -19,7 +19,7 @@ const Illustrations = () => {
   }, []);
 
   const postImageString = async () => {
-    const body = 'BIBIB';
+    const body = { title: 'BIBIB', src: '12343234312dfd' };
 
     try {
       let response = await fetch('/api/postImage', {
@@ -44,9 +44,9 @@ const Illustrations = () => {
         {images.map((image) => {
           return (
             <Image
-              key={image.src}
+              key={image._id}
               src={image.src}
-              alt={image.name}
+              alt={image.title}
               width={80}
               height={80}
               className="illustration"
