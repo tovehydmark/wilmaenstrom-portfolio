@@ -20,7 +20,7 @@ const Illustrations = () => {
   }, []);
 
   const postImageString = async () => {
-    const body = { title: '/BIBIB', src: '12343234312dfd' };
+    const body = { title: '/BIBIB', src: '/mucha-4.jpeg' };
 
     try {
       let response = await fetch('/api/postImage', {
