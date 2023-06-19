@@ -1,15 +1,16 @@
+import { ImageDocument } from '@/app/api/models';
 import Layout from '@/app/layout';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 const Illustrations = () => {
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState<ImageDocument[]>([]);
 
   useEffect(() => {
     (async () => {
       try {
-        let response = await fetch('/api/getImages');
-        let data = await response.json();
+        const response = await fetch('/api/getImages');
+        const data: ImageDocument[] = await response.json();
 
         setImages(data);
       } catch (error) {
@@ -19,7 +20,7 @@ const Illustrations = () => {
   }, []);
 
   const postImageString = async () => {
-    const body = { title: 'BIBIB', src: '12343234312dfd' };
+    const body = { title: '/BIBIB', src: '12343234312dfd' };
 
     try {
       let response = await fetch('/api/postImage', {
@@ -31,7 +32,7 @@ const Illustrations = () => {
           'Content-Type': 'application/json',
         },
       });
-      response = await response.json();
+      const data: ImageDocument[] = await response.json();
     } catch (error) {
       console.log(error);
     }
