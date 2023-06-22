@@ -12,7 +12,7 @@ const Illustrations = () => {
         const response = await fetch('/api/getImages');
         const data: ImageDocument[] = await response.json();
 
-        setImages(data);
+        // setImages(data);
       } catch (error) {
         console.log(error);
       }
@@ -37,6 +37,7 @@ const Illustrations = () => {
       console.log(error);
     }
   };
+  console.log(images);
 
   return (
     <>
