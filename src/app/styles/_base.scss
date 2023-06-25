@@ -13,6 +13,10 @@ header {
     display: none;
   }
 }
+
+main {
+  min-height: 100vh;
+}
 .illustration-container {
   display: flex;
   flex-direction: row;
@@ -27,4 +31,17 @@ header {
   border: 1px solid black;
   border-radius: 5px;
   margin: 5px;
+}
+
+//// Footer ////
+
+footer {
+  height: 100px;
+  margin-top: 2rem;
+  text-align: center;
+  border-top: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
