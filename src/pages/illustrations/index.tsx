@@ -44,14 +44,9 @@ const Illustrations = () => {
       <div className="illustration-container">
         {images.map((image) => {
           return (
-            <Image
-              key={image._id}
-              src={image.src}
-              alt={image.title}
-              width={80}
-              height={80}
-              className="illustration"
-            ></Image>
+            <div key={image._id} className="illustration">
+              <Image src={image.src} alt={image.title} fill></Image>
+            </div>
           );
         })}{' '}
       </div>
