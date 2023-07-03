@@ -4,8 +4,8 @@ const About = () => {
   return (
     <>
       <Layout>
-        <h1>Om mig</h1>
         <section className="about-container">
+          <h1>Om mig</h1>
           <article>
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et

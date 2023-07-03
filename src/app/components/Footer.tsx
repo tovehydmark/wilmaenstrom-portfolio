@@ -2,8 +2,7 @@ const Footer = () => {
   return (
     <>
       <footer>
-        <p>Wilma Enström 2023</p>
-        <p>Website created by Tove Hydmark</p>
+        <p>Created by Tove Hydmark 2023</p>
       </footer>
     </>
   );
