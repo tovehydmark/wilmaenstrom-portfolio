@@ -1,24 +1,5 @@
 //This file contains all styling specific for tablet (min-width: 700px)
 
-nav {
-  width: 80%;
-  margin: 30px auto;
-
-  ul {
-    list-style: none;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 0;
-    li {
-      font-size: 1.5rem;
-      a {
-        text-decoration: none;
-      }
-    }
-  }
-}
-
 main {
   width: 80%;
   margin: 0 auto;
