@@ -48,7 +48,7 @@ const Illustrations = () => {
               <Image src={image.src} alt={image.title} fill></Image>
             </div>
           );
-        })}{' '}
+        })}
       </div>
     </>
   );
