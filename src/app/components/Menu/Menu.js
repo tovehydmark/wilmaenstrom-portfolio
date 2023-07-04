@@ -5,17 +5,29 @@ import Link from 'next/link';
 import { StyledMenu } from './Menu.styled';
 
 const Menu = ({ open, setOpen }) => {
+  const toggleMenu = () => {
+    if (open) {
+      setOpen(false);
+    }
+  };
+
   return (
     <StyledMenu open={open}>
       <ul>
         <li>
-          <Link href="/">Illustrationer</Link>
+          <Link onClick={toggleMenu} href="/">
+            Illustrationer
+          </Link>
         </li>
         <li>
-          <Link href="/about">Om mig</Link>
+          <Link href="/about" onClick={toggleMenu}>
+            Om mig
+          </Link>
         </li>
         <li>
-          <Link href="/contact">Kontakt</Link>
+          <Link href="/contact" onClick={toggleMenu}>
+            Kontakt
+          </Link>
         </li>
       </ul>
     </StyledMenu>

@@ -1,19 +1,25 @@
 //This file contains all styling specific for tablet (min-width: 700px)
 
-nav {
+main {
   width: 80%;
-  margin: 30px auto;
+  margin: 0 auto;
+}
 
-  ul {
-    list-style: none;
-    display: flex;
+.about-container {
+  .education-section {
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-between;
-    li {
-      font-size: 1.5rem;
-      a {
-        text-decoration: none;
-      }
+    article {
+      width: 40%;
+    }
+  }
+  .work-experience-section {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    article {
+      width: 40%;
     }
   }
 }
