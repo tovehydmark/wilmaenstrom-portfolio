@@ -41,7 +41,7 @@ const Illustrations = () => {
   return (
     <>
       <button onClick={postImageString}>Posta</button>
-      {/* <div className="illustration-container">
+      <div className="illustration-container">
         {images.map((image) => {
           return (
             <div key={image._id} className="illustration">
@@ -49,7 +49,7 @@ const Illustrations = () => {
             </div>
           );
         })}{' '}
-      </div> */}
+      </div>
     </>
   );
 };
