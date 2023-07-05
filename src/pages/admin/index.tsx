@@ -1,9 +1,16 @@
 import Link from 'next/link';
 import { Router, useRouter } from 'next/router';
 
-const Admin = () => {
+const Login = () => {
   const router = useRouter();
-  const handleLogin = () => {
+  const handleLogin = async () => {
+    try {
+      const response = await fetch('/api/getImages');
+      const data = await response.json();
+    } catch (error) {
+      console.log(error);
+    }
+
     router.push('/admin/dashboard');
   };
   return (
@@ -21,4 +28,4 @@ const Admin = () => {
   );
 };
 
-export default Admin;
+export default Login;
