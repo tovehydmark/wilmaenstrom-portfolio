@@ -3,12 +3,12 @@ import mongoose from 'mongoose';
 
 const UserSchema = new mongoose.Schema({
   username: String,
-  name: String,
-  email: String,
+  // name: String,
+  // email: String,
   password: String,
   hash: String,
   salt: String,
-  admin: Boolean,
+  // admin: Boolean,
 });
 
 // Method to set salt and hash the password for a user
