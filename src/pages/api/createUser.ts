@@ -21,13 +21,9 @@ export async function createUser(req: NextApiRequest, res: NextApiResponse) {
 
     let newUser = new UserModel();
     newUser.username = req.body.username;
-    // newUser.name = req.body.name;
-    // newUser.email = req.body.email;
     newUser.setPassword(req.body.password);
 
     const user = await db.collection('users').insertOne(newUser);
-
-    console.log('user', user);
 
     res.status(201).send({ data: user });
   } catch (error) {

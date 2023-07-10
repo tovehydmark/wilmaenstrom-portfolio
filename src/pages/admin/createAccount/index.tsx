@@ -3,12 +3,12 @@ import { useState } from 'react';
 
 const CreateAccount = () => {
   const router = useRouter();
-  const [userName, setUserName] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleCreateUser = async () => {
     try {
-      const body = { userName: userName, password: password };
+      const body = { username: username, password: password };
 
       const response = await fetch('/api/createUser', {
         method: 'POST',
@@ -18,7 +18,6 @@ const CreateAccount = () => {
         body: JSON.stringify(body),
       });
       const data = await response.json();
-      console.log('data', data);
     } catch (error) {
       console.log(error);
     }
@@ -36,7 +35,7 @@ const CreateAccount = () => {
         }}
       >
         <label htmlFor="username">Användarnamn:</label>
-        <input type="text" id="username" value={userName} onChange={(e) => setUserName(e.target.value)} />
+        <input type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)} />
         <label htmlFor="password">Lösenord:</label>
         <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         <button type="submit">Skapa konto</button>
