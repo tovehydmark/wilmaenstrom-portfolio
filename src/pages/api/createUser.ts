@@ -19,9 +19,11 @@ export async function createUser(req: NextApiRequest, res: NextApiResponse) {
     //   return res.status(403).send({ success: false, error: 'Email taken' });
     // }
 
+    console.log('req.body', req.body);
+
     let newUser = new UserModel();
     newUser.username = req.body.username;
-    newUser.setPassword(req.body.password);
+    newUser.password = req.body.password;
 
     const user = await db.collection('users').insertOne(newUser);
 
