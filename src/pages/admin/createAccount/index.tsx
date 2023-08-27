@@ -9,6 +9,7 @@ const CreateAccount = () => {
   const handleCreateUser = async () => {
     try {
       const body = { username: username, password: password };
+      console.log('body', body);
 
       const response = await fetch('/api/createUser', {
         method: 'POST',
@@ -17,7 +18,11 @@ const CreateAccount = () => {
         },
         body: JSON.stringify(body),
       });
+
+      console.log('response', response);
+
       const data = await response.json();
+      console.log('data', data);
     } catch (error) {
       console.log(error);
     }

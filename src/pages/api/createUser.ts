@@ -7,20 +7,6 @@ export async function createUser(req: NextApiRequest, res: NextApiResponse) {
   const db = client.db('wilma-portfolio');
 
   try {
-    // const usernameTaken = await UserModel.findOne({
-    //   username: req.body.username,
-    // });
-    // if (usernameTaken) {
-    //   return res.status(403).send({ success: false, error: 'Username is taken' });
-    // }
-
-    // const emailTaken = await UserModel.findOne({ email: req.body.email });
-    // if (emailTaken) {
-    //   return res.status(403).send({ success: false, error: 'Email taken' });
-    // }
-
-    console.log('req.body', req.body);
-
     let newUser = new UserModel();
     newUser.username = req.body.username;
     newUser.password = req.body.password;
