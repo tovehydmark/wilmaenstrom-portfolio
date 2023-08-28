@@ -13,6 +13,7 @@ const Illustrations = () => {
         const data: ImageDocument[] = await response.json();
 
         setImages(data);
+        console.log('data', data);
       } catch (error) {
         console.log(error);
       }
@@ -25,7 +26,7 @@ const Illustrations = () => {
         {images.map((image) => {
           return (
             <div key={image._id} className="illustration">
-              <Image src={image.src} alt={image.title} fill></Image>
+              <Image src={`/api/image/${image._id}`} alt={image.filename} fill></Image>
             </div>
           );
         })}

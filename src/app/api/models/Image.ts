@@ -8,9 +8,9 @@ const ImageSchema = new Schema({
 });
 
 export type ImageDocument = Document & {
-  title: string;
-  src: string;
-  image: string;
+  filename: string;
+  contentType: string;
+  data: string;
 };
 
 export default models[ModelName.Image] || model<ImageDocument>(ModelName.Image, ImageSchema);

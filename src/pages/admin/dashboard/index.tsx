@@ -1,4 +1,5 @@
 import { ImageDocument } from '@/app/api/models';
+import ImageUploadForm from '@/app/components/ImageUploadForm';
 
 const Dashboard = () => {
   //Fetch all images in a grid
@@ -27,6 +28,7 @@ const Dashboard = () => {
     <>
       <h1>Post images</h1>
       <button onClick={postImageString}>Posta</button>
+      <ImageUploadForm></ImageUploadForm>
     </>
   );
 };
