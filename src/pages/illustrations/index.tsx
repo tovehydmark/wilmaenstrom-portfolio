@@ -19,28 +19,8 @@ const Illustrations = () => {
     })();
   }, []);
 
-  const postImageString = async () => {
-    const body = { title: '/BIBIB', src: '/mucha-4.jpeg' };
-
-    try {
-      let response = await fetch('/api/postImage', {
-        method: 'POST',
-        body: JSON.stringify(body),
-
-        headers: {
-          Accept: 'application/json, text/plain, */*',
-          'Content-Type': 'application/json',
-        },
-      });
-      const data: ImageDocument[] = await response.json();
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <>
-      <button onClick={postImageString}>Posta</button>
       <div className="illustration-container">
         {images.map((image) => {
           return (
