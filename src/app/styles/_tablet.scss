@@ -5,6 +5,11 @@ main {
   margin: 0 auto;
 }
 
+.illustration-container {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
 .about-container {
   .education-section {
     flex-direction: row;
@@ -22,4 +27,15 @@ main {
       width: 40%;
     }
   }
+}
+
+/// ADMIN SECTION ///
+.upload-file-container {
+  margin-top: 1rem;
+  flex-direction: column;
+}
+
+.image-for-upload {
+  max-width: 350px;
+  margin: 0;
 }

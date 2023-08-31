@@ -5,9 +5,7 @@ export async function postImage(req: NextApiRequest, res: NextApiResponse) {
   try {
     const client = await clientPromise;
     const db = client.db('wilma-portfolio');
-    const imageData = req.body;
-
-    const result = await db.collection('images').insertOne(imageData);
+    const result = await db.collection('images').insertOne({ image: req.body });
 
     res.json(result);
   } catch (e) {
