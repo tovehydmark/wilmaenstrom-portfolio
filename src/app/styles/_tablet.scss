@@ -6,7 +6,8 @@ main {
 }
 
 .illustration-container {
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
 }
 
 .about-container {
@@ -27,3 +28,9 @@ main {
     }
   }
 }
+
+/// ADMIN SECTION ///
+
+// .upload-file-section {
+//   display: flex;
+// }

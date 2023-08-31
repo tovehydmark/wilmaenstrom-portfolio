@@ -15,6 +15,8 @@ const ImageUploadForm = () => {
     };
   };
 
+  console.log('image', image);
+
   const uploadImage = async () => {
     try {
       const response = await fetch('/api/postImage', {
@@ -35,9 +37,14 @@ const ImageUploadForm = () => {
 
   return (
     <>
-      <input type="file" accept="image/*" onChange={handleSubmit} />
-      <button onClick={uploadImage}>Upload</button>
-      {image === '' || image === null ? '' : <img width={100} height={100} src={image} alt="alttext"></img>}
+      <section className="upload-file-section">
+        {' '}
+        {!image ? '' : <img className="image-for-upload" src={image} alt="alttext"></img>}
+        <div className="upload-file-container">
+          <input type="file" accept="image/*" onChange={handleSubmit} />
+          <button onClick={uploadImage}>Upload</button>
+        </div>
+      </section>
     </>
   );
 };
