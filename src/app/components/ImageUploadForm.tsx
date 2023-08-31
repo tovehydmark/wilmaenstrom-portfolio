@@ -15,23 +15,25 @@ const ImageUploadForm = () => {
     };
   };
 
-  console.log('image', image);
-
   const uploadImage = async () => {
-    try {
-      const response = await fetch('/api/postImage', {
-        method: 'POST',
-        body: JSON.stringify(image),
-      });
-      console.log('response', response);
+    if (image) {
+      try {
+        const response = await fetch('/api/postImage', {
+          method: 'POST',
+          body: JSON.stringify(image),
+        });
+        console.log('response', response);
 
-      if (response.ok) {
-        console.log('Image uploaded successfully!');
-      } else {
-        console.error('Image upload failed.');
+        if (response.ok) {
+          console.log('Image uploaded successfully!');
+        } else {
+          console.error('Image upload failed.');
+        }
+      } catch (error) {
+        console.error('Error uploading image:', error);
       }
-    } catch (error) {
-      console.error('Error uploading image:', error);
+    } else {
+      console.log('No image has been selected');
     }
   };
 
@@ -42,7 +44,7 @@ const ImageUploadForm = () => {
         {!image ? '' : <img className="image-for-upload" src={image} alt="alttext"></img>}
         <div className="upload-file-container">
           <input type="file" accept="image/*" onChange={handleSubmit} />
-          <button onClick={uploadImage}>Upload</button>
+          <button onClick={uploadImage}>Ladda upp bild</button>
         </div>
       </section>
     </>
