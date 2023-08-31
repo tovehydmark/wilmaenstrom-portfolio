@@ -23,7 +23,7 @@ export const StyledBurger = styled.button`
     width: 2rem;
     height: 0.25rem;
     //Todo: variabel för färger
-    background-color: white;
+    background-color: #444444;
     border-radius: 10px;
     transition: all 0.3s linear;
     position: relative;

@@ -10,9 +10,16 @@ header {
   background-image: url('/header.png');
 
   .header-name-container {
-    background-color: #a6a6a6a8;
+    padding-top: 30px;
     width: fit-content;
     margin: 0 auto;
+
+    div {
+      background-color: #a6a6a6a8;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      padding: 1rem;
+    }
   }
 
   nav {

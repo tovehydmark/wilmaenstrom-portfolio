@@ -5,8 +5,10 @@ const Header = () => {
     <>
       <header>
         <div className="header-name-container">
-          <h1>Wilma Enström</h1>
-          <p>Visual artist</p>
+          <div>
+            <h1>Wilma Enström</h1>
+            <p>Visual artist</p>
+          </div>
         </div>
 
         <Navigation></Navigation>
