@@ -159,15 +159,10 @@ main {
   }
 }
 
-// .upload-file-section {
-//   display: flex;
-// }
-
 .upload-file-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  // width: 40%;
 
   input[type='file']::file-selector-button {
     border: 1px solid #000000;
@@ -195,9 +190,7 @@ main {
 }
 
 .image-for-upload {
-  margin-top: 1rem;
   width: 100%;
-  // max-width: 300px;
   margin: 1rem auto;
   position: relative;
   display: block;

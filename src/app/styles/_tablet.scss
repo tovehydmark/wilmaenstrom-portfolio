@@ -30,7 +30,12 @@ main {
 }
 
 /// ADMIN SECTION ///
+.upload-file-container {
+  margin-top: 1rem;
+  flex-direction: column;
+}
 
-// .upload-file-section {
-//   display: flex;
-// }
+.image-for-upload {
+  max-width: 300px;
+  margin: 0;
+}
