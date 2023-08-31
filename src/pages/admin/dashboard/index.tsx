@@ -8,7 +8,6 @@ const Dashboard = () => {
 
   return (
     <>
-      <h1>Post images</h1>
       <ImageUploadForm></ImageUploadForm>
     </>
   );

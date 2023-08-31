@@ -5,6 +5,10 @@ main {
   margin: 0 auto;
 }
 
+.illustration-container {
+  grid-template-columns: repeat(2, 1fr);
+}
+
 .about-container {
   .education-section {
     flex-direction: row;

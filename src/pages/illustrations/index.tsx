@@ -1,5 +1,4 @@
 import { ImageDocument } from '@/app/api/models';
-import Layout from '@/app/layout';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
@@ -21,13 +20,15 @@ const Illustrations = () => {
   return (
     <>
       <div className="illustration-container">
-        {images.map((image) => {
-          return (
-            <div key={image._id} className="illustration">
-              <Image src={JSON.parse(image.image)} alt={image.image} fill></Image>
-            </div>
-          );
-        })}
+        {images.length > 0
+          ? images.map((image) => {
+              return (
+                <div key={image._id} className="illustration">
+                  <Image className="image-to-display" src={JSON.parse(image.image)} alt={image.image} fill></Image>
+                </div>
+              );
+            })
+          : ''}
       </div>
     </>
   );
