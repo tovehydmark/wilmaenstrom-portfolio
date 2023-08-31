@@ -2,12 +2,24 @@
 
 header {
   height: 200px;
-  background-color: rgba(87, 138, 118, 0.8);
-  color: white;
-
+  color: rgb(44, 44, 44);
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
   text-align: center;
-  h1 {
-    padding-top: 50px;
+  background-image: url('/header.png');
+
+  .header-name-container {
+    padding-top: 30px;
+    width: fit-content;
+    margin: 0 auto;
+
+    div {
+      background-color: #a6a6a6a8;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      padding: 1rem;
+    }
   }
 
   nav {
@@ -22,7 +34,7 @@ header {
 main {
   min-height: 100vh;
   width: 90%;
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
 }
 

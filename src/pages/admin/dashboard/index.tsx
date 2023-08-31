@@ -1,11 +1,10 @@
 import { ImageDocument } from '@/app/api/models';
 import ImageUploadForm from '@/app/components/ImageUploadForm';
+
 import Illustrations from '@/pages/illustrations';
 
 const Dashboard = () => {
-  //Fetch all images in a grid
-  //Enable to delete image on X
-  //Post new image from here
+  //Todo: Enable to delete image on X
 
   return (
     <>
