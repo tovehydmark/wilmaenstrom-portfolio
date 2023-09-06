@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org/) project created for the artist Wilma Enström as a way for her to show her work. The project is under development.
+This is a portfolio site created in Next.js for the artist Wilma Enström. The project is under development.
 
 ## Getting Started
 
