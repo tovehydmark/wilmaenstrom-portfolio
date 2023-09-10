@@ -30,10 +30,9 @@ const Login = () => {
         },
       });
 
-      console.log('response', response);
-
       if (response.ok) {
         const data = await response.json();
+
         router.push('/admin/dashboard');
       } else {
         console.log('Login failed');

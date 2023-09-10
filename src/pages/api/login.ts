@@ -1,40 +1,49 @@
 import { UserModel } from '@/app/api/models';
 import clientPromise from '@/app/lib/mongodb'; // Update import to match your file structure
 import { NextApiRequest, NextApiResponse } from 'next/types';
+import bcryptjs from 'bcryptjs';
 
-export async function login(req: NextApiRequest, res: NextApiResponse) {
+const verifyUserLogin = async (username: string, password: string) => {
   try {
-    // Connect to the MongoDB database
     const client = await clientPromise;
     const db = client.db('wilma-portfolio');
 
-    // Access the UserModel collection and query for the user
     const userCollection = db.collection('users');
-
-    const user = await userCollection.findOne({ username: req.body.username });
+    const user = await userCollection.findOne({ username });
 
     if (!user) {
-      return res.status(401).json({
-        message: 'User not found.',
-      });
+      return { status: 'error', error: 'User not found' };
     }
 
-    if (user.password === req.body.password) {
-      return res.json({
-        message: 'User Logged In',
-        userId: user._id,
-      });
-    } else {
-      console.log('fel lösen');
+    const isPasswordValid = await bcryptjs.compare(password, user.password);
 
-      return res.status(401).json({
-        message: 'Wrong Password',
-      });
+    if (isPasswordValid) {
+      return { status: 'ok', data: 'User logged in successfully' };
+    } else {
+      return { status: 'error', error: 'Invalid password' };
     }
   } catch (error) {
-    console.log('error', error);
+    console.error(error);
+    return { status: 'error', error: 'An error occurred' };
+  }
+};
 
-    res.status(401).json({ error: error });
+export async function login(req: NextApiRequest, res: NextApiResponse) {
+  try {
+    const { username, password } = req.body;
+
+    const loginResult = await verifyUserLogin(username, password);
+
+    if (loginResult.status === 'ok') {
+      // Here, you can generate and return a JWT token for the user
+      // and handle successful login as per your requirements.
+      return res.status(200).json({ message: loginResult.data });
+    } else {
+      return res.status(401).json({ message: loginResult.error });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred' });
   }
 }
 
