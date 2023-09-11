@@ -2,9 +2,36 @@ import { ImageDocument } from '@/app/api/models';
 import ImageUploadForm from '@/app/components/ImageUploadForm';
 
 import Illustrations from '@/pages/illustrations';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const Dashboard = () => {
   //Todo: Enable to delete image on X
+
+  const checkIfUserIsAuthenticated = () => {
+    const token = localStorage.getItem('authToken');
+
+    if (!token) {
+      return false;
+    }
+
+    try {
+      return true;
+    } catch (error) {
+      console.error('Token verification error:', error);
+      return false;
+    }
+  };
+
+  const router = useRouter();
+
+  useEffect(() => {
+    const isAuthenticated = checkIfUserIsAuthenticated();
+
+    if (!isAuthenticated) {
+      router.push('/admin');
+    }
+  }, []);
 
   return (
     <>
