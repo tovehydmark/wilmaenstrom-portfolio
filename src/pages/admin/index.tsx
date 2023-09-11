@@ -32,6 +32,7 @@ const Login = () => {
 
       if (response.ok) {
         const data = await response.json();
+        localStorage.setItem('authToken', data.token);
 
         router.push('/admin/dashboard');
       } else {

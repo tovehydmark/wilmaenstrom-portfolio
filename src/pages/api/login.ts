@@ -1,7 +1,8 @@
 import { UserModel } from '@/app/api/models';
-import clientPromise from '@/app/lib/mongodb'; // Update import to match your file structure
+import clientPromise from '@/app/lib/mongodb';
 import { NextApiRequest, NextApiResponse } from 'next/types';
 import bcryptjs from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 const verifyUserLogin = async (username: string, password: string) => {
   try {
@@ -17,8 +18,13 @@ const verifyUserLogin = async (username: string, password: string) => {
 
     const isPasswordValid = await bcryptjs.compare(password, user.password);
 
-    if (isPasswordValid) {
-      return { status: 'ok', data: 'User logged in successfully' };
+
+    if (isPasswordValid && user.admin) {
+      const token = jwt.sign({ userId: user._id, username: user.username }, JSON.stringify(process.env.SECRET_KEY), {
+        expiresIn: '2h',
+      });
+
+      return { status: 'ok', data: 'User logged in successfully', token };
     } else {
       return { status: 'error', error: 'Invalid password' };
     }
@@ -35,9 +41,7 @@ export async function login(req: NextApiRequest, res: NextApiResponse) {
     const loginResult = await verifyUserLogin(username, password);
 
     if (loginResult.status === 'ok') {
-      // Here, you can generate and return a JWT token for the user
-      // and handle successful login as per your requirements.
-      return res.status(200).json({ message: loginResult.data });
+      return res.status(200).json({ message: loginResult.data, token: loginResult.token });
     } else {
       return res.status(401).json({ message: loginResult.error });
     }
