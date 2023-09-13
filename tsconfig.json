@@ -29,7 +29,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/app/components/Burger/Burger.js",
-    "src/app/components/Menu/Menu.js"
+    "src/app/components/Menu/Menu.js",
+    "src/app/lib/azureConnection.ts"
   ],
   "exclude": ["node_modules"]
 }

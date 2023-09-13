@@ -6,6 +6,7 @@ const ImageUploadForm = () => {
   const handleSubmit = async (e) => {
     const reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
+    console.log('e.target.files[0]', e.target.files[0]);
 
     reader.onload = () => {
       setImage(reader.result);
@@ -17,10 +18,15 @@ const ImageUploadForm = () => {
 
   const uploadImage = async () => {
     if (image) {
+      console.log('image', image);
       try {
+        const headers = {
+          'Content-Type': 'image/jpeg',
+        };
         const response = await fetch('/api/postImage', {
           method: 'POST',
-          body: JSON.stringify(image),
+          body: image,
+          headers: headers,
         });
         console.log('response', response);
 

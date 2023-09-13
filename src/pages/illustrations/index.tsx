@@ -20,15 +20,26 @@ const Illustrations = () => {
   return (
     <>
       <div className="illustration-container">
-        {images.length > 0
+        {/* {images.length > 0
           ? images.map((image) => {
               return (
                 <div key={image._id} className="illustration">
-                  <Image className="image-to-display" src={JSON.parse(image.image)} alt={image.image} fill></Image>
+                  <Image
+                    className="image-to-display"
+                    src={'https://wilmaenstrom.blob.core.windows.net/wilmascontainer/example.jpg'}
+                    alt={'hej'}
+                    fill
+                  ></Image>
                 </div>
               );
             })
-          : ''}
+          : ''} */}
+        {/* <Image
+          className="image-to-display"
+          src={'https://wilmaenstrom.blob.core.windows.net/wilmascontainer/example.jpg'}
+          alt={'hej'}
+          fill
+        ></Image> */}
       </div>
     </>
   );
