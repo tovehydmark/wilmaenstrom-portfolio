@@ -1,30 +1,29 @@
 import { BlobServiceClient } from '@azure/storage-blob';
 
 const connectionString = process.env.AZURE_CONNECTION;
-
 const blobServiceClient = BlobServiceClient.fromConnectionString(connectionString as string);
+const containerName = process.env.AZURE_CONTAINERNAME;
 
-const containerName = 'wilmascontainer';
-
-async function uploadImageToAzureStorage(fileBuffer, fileName) {
-  const containerClient = blobServiceClient.getContainerClient(containerName);
+async function uploadImageToAzureStorage(fileBuffer, fileName, contentType) {
+  const containerClient = blobServiceClient.getContainerClient(containerName as string);
   const blockBlobClient = containerClient.getBlockBlobClient(fileName);
 
-  await blockBlobClient.upload(
-    fileBuffer,
-    fileBuffer.length,
-    //   , {
-    //   blobHTTPHeaders: {
-    //     blobContentType: contentType, // Set the content type here
-    //   },
-    // }
-  );
+  try {
+    await blockBlobClient.uploadData(fileBuffer, {
+      blobHTTPHeaders: { blobContentType: contentType },
+    });
 
-  return blockBlobClient.url; // Return the URL of the uploaded image
+    return blockBlobClient.url;
+  } catch (error) {
+    console.error('Error uploading image:', error);
+    throw error;
+  }
 }
 
+// export { uploadImageToAzureStorage };
+
 async function getImageUrlFromAzureStorage(fileName) {
-  const containerClient = blobServiceClient.getContainerClient(containerName);
+  const containerClient = blobServiceClient.getContainerClient(containerName as string);
   const blockBlobClient = containerClient.getBlockBlobClient(fileName);
 
   if (await blockBlobClient.exists()) {
@@ -38,35 +37,3 @@ export default {
   uploadImageToAzureStorage,
   getImageUrlFromAzureStorage,
 };
-
-// import { BlobServiceClient } from '@azure/storage-blob';
-
-// const connectionString = process.env.AZURE_CONNECTION;
-
-// const blobServiceClient = BlobServiceClient.fromConnectionString(connectionString as string);
-
-// const containerName = 'wilmascontainer';
-
-// async function uploadImageToAzureStorage(fileBuffer, fileName) {
-//   const containerClient = blobServiceClient.getContainerClient(containerName);
-//   const blockBlobClient = containerClient.getBlockBlobClient(fileName);
-
-//   await blockBlobClient.upload(fileBuffer, fileBuffer.length);
-//   return blockBlobClient.url; // Return the URL of the uploaded image
-// }
-
-// async function getImageUrlFromAzureStorage(fileName) {
-//   const containerClient = blobServiceClient.getContainerClient(containerName);
-//   const blockBlobClient = containerClient.getBlockBlobClient(fileName);
-
-//   if (await blockBlobClient.exists()) {
-//     return blockBlobClient.url; // Return the URL of the image
-//   } else {
-//     throw new Error('Image not found in Azure Blob Storage.');
-//   }
-// }
-
-// export default {
-//   uploadImageToAzureStorage,
-//   getImageUrlFromAzureStorage,
-// };
