@@ -4,7 +4,7 @@ const connectionString = process.env.AZURE_CONNECTION;
 const blobServiceClient = BlobServiceClient.fromConnectionString(connectionString as string);
 const containerName = process.env.AZURE_CONTAINERNAME;
 
-async function uploadImageToAzureStorage(fileBuffer, fileName, contentType) {
+async function uploadImageToAzureStorage(fileBuffer: Buffer, fileName: string, contentType: string) {
   const containerClient = blobServiceClient.getContainerClient(containerName as string);
   const blockBlobClient = containerClient.getBlockBlobClient(fileName);
 
@@ -22,7 +22,7 @@ async function uploadImageToAzureStorage(fileBuffer, fileName, contentType) {
 
 // export { uploadImageToAzureStorage };
 
-async function getImageUrlFromAzureStorage(fileName) {
+async function getImageUrlFromAzureStorage(fileName: string) {
   const containerClient = blobServiceClient.getContainerClient(containerName as string);
   const blockBlobClient = containerClient.getBlockBlobClient(fileName);
 

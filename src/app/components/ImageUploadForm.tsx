@@ -1,18 +1,20 @@
 import { useState } from 'react';
 
 const ImageUploadForm = () => {
-  const [image, setImage] = useState<any>(null);
+  const [image, setImage] = useState<string | ArrayBuffer | null>('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
     const reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
+    if (e.target.files) {
+      reader.readAsDataURL(e.target.files[0]);
 
-    reader.onload = () => {
-      setImage(reader.result);
-    };
-    reader.onerror = () => {
-      console.log('reader.error', reader.error);
-    };
+      reader.onload = () => {
+        setImage(reader.result);
+      };
+      reader.onerror = () => {
+        console.log('reader.error', reader.error);
+      };
+    }
   };
 
   const uploadImage = async () => {
