@@ -3,14 +3,14 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 const Illustrations = () => {
-  const [images, setImages] = useState<ImageDocument[]>([]);
+  const [images, setImages] = useState<any>();
 
   useEffect(() => {
     (async () => {
       try {
         const response = await fetch('/api/getImages');
-        const data: ImageDocument[] = await response.json();
-        setImages(data);
+        const data: any = await response.json();
+        setImages(data.imageUrl);
       } catch (error) {
         console.log(error);
       }
@@ -34,12 +34,7 @@ const Illustrations = () => {
               );
             })
           : ''} */}
-        {/* <Image
-          className="image-to-display"
-          src={'https://wilmaenstrom.blob.core.windows.net/wilmascontainer/example.jpg'}
-          alt={'hej'}
-          fill
-        ></Image> */}
+        <Image className="image-to-display" src={images ? images : '/no-data'} alt={'hej'} fill></Image>
       </div>
     </>
   );

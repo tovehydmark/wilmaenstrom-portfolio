@@ -1,18 +1,14 @@
-import clientPromise from '@/app/lib/mongodb';
 import { NextApiRequest, NextApiResponse } from 'next';
+import azureStorage from '../../app/lib/azureConnection';
 
 export async function getImages(req: NextApiRequest, res: NextApiResponse) {
   try {
-    const client = await clientPromise;
-    const db = client.db('wilma-portfolio');
-    const collection = db.collection('images');
+    const fileName = 'example-12';
+    const imageUrl = await azureStorage.getImageUrlFromAzureStorage(fileName);
 
-    const images = await collection.find().toArray();
-
-    res.json(images);
-  } catch (e) {
-    console.error(e);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(200).json({ imageUrl });
+  } catch (error) {
+    console.log('error', error);
   }
 }
 
