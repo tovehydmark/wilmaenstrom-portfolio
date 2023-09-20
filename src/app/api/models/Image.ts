@@ -1,12 +1,8 @@
-import { model, models, Schema, Document } from 'mongoose';
-import { ModelName } from './modelnames';
+import mongoose, { Document } from 'mongoose';
 
-const ImageSchema = new Schema({
-  image: { type: String, required: true },
+const ImageSchema = new mongoose.Schema({
+  imageUrl: { type: String, required: true, unique: true },
+  fileName: { type: String, required: true },
 });
 
-export type ImageDocument = Document & {
-  image: string;
-};
-
-export default models[ModelName.Image] || model<ImageDocument>(ModelName.Image, ImageSchema);
+export default module.exports = mongoose.models.Image || mongoose.model('Image', ImageSchema);
