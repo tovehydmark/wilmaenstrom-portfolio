@@ -4,7 +4,7 @@ import azureStorage from '../../app/lib/azureConnection';
 export default async function postImage(req: NextApiRequest, res: NextApiResponse) {
   try {
     const fileBuffer = Buffer.from(req.body.replace(/^data:image\/\w+;base64,/, ''), 'base64');
-    const fileName = 'example-17';
+    const fileName = req.headers.imagename;
     const imageUrl = await azureStorage.uploadImageToAzureStorage(fileBuffer, fileName, req.headers['content-type']);
 
     res.status(200).json(imageUrl);
