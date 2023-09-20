@@ -30,7 +30,7 @@ const ImageUploadForm = () => {
           imageName: imageInfo.name,
         };
 
-        const response = await fetch('/api/postImage', {
+        const response = await fetch('/api/postImageToAzure', {
           method: 'POST',
           body: image,
           headers: headers,
@@ -38,6 +38,23 @@ const ImageUploadForm = () => {
 
         if (response.ok) {
           console.log('Image uploaded successfully!');
+
+          const data = await response.json();
+
+          try {
+            const responseFromMongoDB = await fetch('/api/postImageInfoToMongoDB', {
+              method: 'POST',
+              body: JSON.stringify(data),
+            });
+
+            if (responseFromMongoDB.ok) {
+              console.log('image saved to MongoDB');
+            } else {
+              console.log('Something went wrong, the image was not saved to MongoDB');
+            }
+          } catch (error) {
+            console.log('error', error);
+          }
         } else {
           console.error('Image upload failed.');
         }
