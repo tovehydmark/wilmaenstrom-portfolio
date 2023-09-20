@@ -1,5 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import azureStorage from '../../app/lib/azureConnection';
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '10mb',
+    },
+  },
+  maxDuration: 5,
+};
 
 export default async function postImageToAzure(req: NextApiRequest, res: NextApiResponse) {
   try {

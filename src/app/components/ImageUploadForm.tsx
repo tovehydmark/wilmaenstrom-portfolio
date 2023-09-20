@@ -9,8 +9,9 @@ const ImageUploadForm = () => {
   const [image, setImage] = useState<any>(null);
   const [imageInfo, setImageInfo] = useState<ImageDocument>();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
     const reader = new FileReader();
+
     reader.readAsDataURL(e.target.files[0]);
     setImageInfo({ name: e.target.files[0].name, type: e.target.files[0].type });
 
