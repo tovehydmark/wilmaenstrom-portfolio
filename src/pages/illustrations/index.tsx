@@ -1,15 +1,17 @@
+import { ImageDocument } from '@/app/api/models/Image';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 const Illustrations = () => {
-  const [images, setImages] = useState<any>();
+  const [images, setImages] = useState<ImageDocument[]>();
 
   useEffect(() => {
     (async () => {
       try {
         const response = await fetch('/api/getImages');
         const data: any = await response.json();
-        setImages(data.imageUrl);
+
+        setImages(data.images);
       } catch (error) {
         console.log(error);
       }
@@ -19,21 +21,15 @@ const Illustrations = () => {
   return (
     <>
       <div className="illustration-container">
-        {/* {images.length > 0
+        {images
           ? images.map((image) => {
               return (
                 <div key={image._id} className="illustration">
-                  <Image
-                    className="image-to-display"
-                    src={'https://wilmaenstrom.blob.core.windows.net/wilmascontainer/example.jpg'}
-                    alt={'hej'}
-                    fill
-                  ></Image>
+                  <Image className="image-to-display" src={image.imageUrl} alt={image.fileName} fill></Image>
                 </div>
               );
             })
-          : ''} */}
-        <Image className="image-to-display" src={images ? images : '/no-data'} alt={'hej'} fill></Image>
+          : ''}
       </div>
     </>
   );
