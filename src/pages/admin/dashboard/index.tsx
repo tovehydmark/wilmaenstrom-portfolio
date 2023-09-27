@@ -50,7 +50,7 @@ const Dashboard = () => {
           </section>
           <section className="admin-gallery">
             <h2>Galleri</h2>
-            {/* <Illustrations></Illustrations> */}
+            <Illustrations></Illustrations>
           </section>
         </div>
       ) : (
