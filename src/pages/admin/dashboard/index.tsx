@@ -1,4 +1,3 @@
-import { ImageDocument } from '@/app/api/models';
 import ImageUploadForm from '@/app/components/ImageUploadForm';
 
 import Illustrations from '@/pages/illustrations';

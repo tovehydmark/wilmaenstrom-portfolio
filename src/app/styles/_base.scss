@@ -66,6 +66,26 @@ main {
   object-fit: cover;
 }
 
+.image-to-display:hover {
+  cursor: pointer;
+}
+
+////Display single image on click page////
+.selected-image-display-page {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  padding-top: 1rem;
+}
+
+.selected-image {
+  position: relative !important;
+  width: 100%;
+}
+
 //// About page ////
 .about-container {
   h1 {

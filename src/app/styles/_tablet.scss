@@ -4,11 +4,17 @@ main {
   margin: 0 auto;
 }
 
+////Illustrations////
 .illustration-container {
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
 }
+.selected-image-display-page {
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
 
+////About////
 .about-container {
   .education-section {
     flex-direction: row;
