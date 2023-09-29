@@ -1,9 +1,11 @@
 import { ImageDocument } from '@/app/api/models/Image';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 const Illustrations = () => {
   const [images, setImages] = useState<ImageDocument[]>();
+  const router = useRouter();
 
   useEffect(() => {
     (async () => {
@@ -18,6 +20,10 @@ const Illustrations = () => {
     })();
   }, []);
 
+  const viewImage = (id: string) => {
+    router.push('/illustrations/' + id);
+  };
+
   return (
     <>
       <div className="illustration-container">
@@ -25,7 +31,13 @@ const Illustrations = () => {
           ? images.map((image) => {
               return (
                 <div key={image._id} className="illustration">
-                  <Image className="image-to-display" src={image.imageUrl} alt={image.fileName} fill></Image>
+                  <Image
+                    className="image-to-display"
+                    src={image.imageUrl}
+                    alt={image.fileName}
+                    fill
+                    onClick={() => viewImage(image?._id ? image._id : '')}
+                  ></Image>
                 </div>
               );
             })
