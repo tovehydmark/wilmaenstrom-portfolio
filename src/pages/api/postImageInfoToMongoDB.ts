@@ -1,6 +1,7 @@
 import clientPromise from '@/app/lib/mongodb';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ImageModel } from '@/app/api/models';
+import { ObjectId } from 'mongodb';
 
 export async function postImageInfoToMongoDB(req: NextApiRequest, res: NextApiResponse) {
   const { imageUrl, fileName } = JSON.parse(req.body);

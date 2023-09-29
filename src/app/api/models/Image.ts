@@ -1,9 +1,10 @@
+import { ObjectId } from 'mongodb';
 import mongoose, { Document, Model } from 'mongoose';
 
 const ImageSchema = new mongoose.Schema({
   imageUrl: { type: String, required: true, unique: true },
   fileName: { type: String, required: true },
-  _id: { type: String, required: false },
+  _id: { type: ObjectId, required: false },
 });
 
 export interface ImageDocument extends Document {
