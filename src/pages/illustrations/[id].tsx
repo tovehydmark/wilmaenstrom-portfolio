@@ -1,10 +1,10 @@
 import { ImageDocument } from '@/app/api/models/Image';
-import { useRouter } from 'next/router';
+import router, { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
-const SelctedImage = () => {
-  const [images, setImages] = useState<ImageDocument[]>();
+export default function SelctedImage({ data }) {
+  const [images, setImages] = useState<ImageDocument[]>(data.images);
   const [image, setImage] = useState<ImageDocument>();
 
   const router = useRouter();
@@ -12,13 +12,12 @@ const SelctedImage = () => {
   useEffect(() => {
     (async () => {
       try {
-        const response = await fetch('/api/getImage/' + router.query.id);
-        const data: any = await response.json();
-        setImage(data.image);
-
-        const getAllImagesResponse = await fetch('/api/getImages');
-        const allImageData: any = await getAllImagesResponse.json();
-        setImages(allImageData.images);
+        images.map((image) => {
+          console.log(image);
+          if (image._id === router.query.id) {
+            setImage(image);
+          }
+        });
       } catch (error) {
         console.log(error);
       }
@@ -69,5 +68,24 @@ const SelctedImage = () => {
       <button onClick={handleNext}>Nästa</button>
     </>
   );
-};
-export default SelctedImage;
+}
+
+export async function getServerSideProps(context) {
+  const { req } = context;
+  const baseUrl = `${req.headers.host}`;
+  const protocol = req.headers['x-forwarded-proto'] || 'http';
+
+  try {
+    const response = await fetch(`${protocol}://${baseUrl}/api/getImages`);
+    const data: ImageDocument[] = await response.json();
+
+    return { props: { data } };
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return {
+      props: {
+        error: 'An error occurred while fetching data',
+      },
+    };
+  }
+}
