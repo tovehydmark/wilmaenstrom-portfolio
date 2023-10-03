@@ -2,10 +2,14 @@ import { ImageDocument } from '@/app/api/models/Image';
 import router, { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 export default function SelctedImage({ data }) {
   const [images, setImages] = useState<ImageDocument[]>(data.images);
   const [image, setImage] = useState<ImageDocument>();
+  const [disableNextButton, setDisableNextButton] = useState<boolean>(false);
+  const [disablePreviousButton, setDisablePreviousButton] = useState<boolean>(false);
 
   const router = useRouter();
 
@@ -13,7 +17,6 @@ export default function SelctedImage({ data }) {
     (async () => {
       try {
         images.map((image) => {
-          console.log(image);
           if (image._id === router.query.id) {
             setImage(image);
           }
@@ -23,13 +26,26 @@ export default function SelctedImage({ data }) {
       }
     })();
   }, [router.query.id]);
-
   const currentIndex = images?.findIndex((img) => img._id === router.query.id);
+
+  useEffect(() => {
+    if (currentIndex == 0) {
+      setDisablePreviousButton(true);
+    } else {
+      setDisablePreviousButton(false);
+    }
+  }, [currentIndex]);
 
   const handlePrevious = () => {
     if (images && currentIndex !== undefined && currentIndex > 0) {
       const previousImage = images[currentIndex - 1];
       router.push(`/illustrations/${previousImage._id}`);
+    }
+    if (currentIndex == 0) {
+      setDisablePreviousButton(true);
+    } else {
+      setDisablePreviousButton(false);
+      setDisableNextButton(false);
     }
   };
 
@@ -38,25 +54,41 @@ export default function SelctedImage({ data }) {
       const nextImage = images[currentIndex + 1];
       router.push(`/illustrations/${nextImage._id}`);
     }
+
+    if (images.length - 2 == currentIndex) {
+      setDisableNextButton(true);
+    } else {
+      setDisableNextButton(false);
+    }
   };
 
   return (
     <>
-      <button onClick={handlePrevious}>Föregående</button>
       <div className="selected-image-display-page">
-        {image ? (
-          <Image
-            className="selected-image"
-            src={image.imageUrl}
-            alt={'alt'}
-            fill
-            style={{
-              objectFit: 'contain',
-            }}
-          ></Image>
-        ) : (
-          ''
-        )}
+        <div>
+          {image ? (
+            <Image
+              className="selected-image"
+              src={image.imageUrl}
+              alt={'alt'}
+              fill
+              style={{
+                objectFit: 'contain',
+              }}
+            ></Image>
+          ) : (
+            ''
+          )}
+          <div className="buttons-layout-selected-image-display">
+            <button onClick={handlePrevious} disabled={disablePreviousButton}>
+              <FontAwesomeIcon icon={faAngleLeft} style={{ color: '#000000' }} />
+            </button>
+            <button onClick={handleNext} disabled={disableNextButton}>
+              <FontAwesomeIcon icon={faAngleRight} style={{ color: '#000000' }} />
+            </button>
+          </div>
+        </div>
+
         <article className="selected-image-info">
           <p>
             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae possimus ea error vitae. Neque
@@ -65,7 +97,6 @@ export default function SelctedImage({ data }) {
           </p>
         </article>
       </div>
-      <button onClick={handleNext}>Nästa</button>
     </>
   );
 }
