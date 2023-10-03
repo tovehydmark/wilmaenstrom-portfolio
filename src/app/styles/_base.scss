@@ -80,6 +80,16 @@ main {
   position: relative;
   padding-top: 1rem;
 }
+.close-selected-image-view {
+  position: absolute;
+  top: 1rem;
+  right: 0;
+  border: none;
+  background-color: transparent;
+  :hover {
+    cursor: pointer;
+  }
+}
 
 .selected-image {
   position: relative !important;
@@ -100,8 +110,9 @@ main {
     cursor: pointer;
   }
   button:disabled {
-    border: 1px solid red;
-    cursor: auto;
+    svg {
+      color: transparent;
+    }
   }
 }
 
