@@ -80,10 +80,40 @@ main {
   position: relative;
   padding-top: 1rem;
 }
+.close-selected-image-view {
+  position: absolute;
+  top: 1rem;
+  right: 0;
+  border: none;
+  background-color: transparent;
+  :hover {
+    cursor: pointer;
+  }
+}
 
 .selected-image {
   position: relative !important;
   width: 100%;
+}
+
+.buttons-layout-selected-image-display {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  gap: 20%;
+  button {
+    border: none;
+    background-color: transparent;
+    font-size: 1.5rem;
+  }
+  button:hover {
+    cursor: pointer;
+  }
+  button:disabled {
+    svg {
+      color: transparent;
+    }
+  }
 }
 
 //// About page ////
