@@ -86,6 +86,25 @@ main {
   width: 100%;
 }
 
+.buttons-layout-selected-image-display {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  gap: 20%;
+  button {
+    border: none;
+    background-color: transparent;
+    font-size: 1.5rem;
+  }
+  button:hover {
+    cursor: pointer;
+  }
+  button:disabled {
+    border: 1px solid red;
+    cursor: auto;
+  }
+}
+
 //// About page ////
 .about-container {
   h1 {
