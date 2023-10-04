@@ -4,7 +4,8 @@ import { ImageModel } from '@/app/api/models';
 import { ObjectId } from 'mongodb';
 
 export async function postImageInfoToMongoDB(req: NextApiRequest, res: NextApiResponse) {
-  const { imageUrl, fileName } = JSON.parse(req.body);
+  const { imageUrl, fileName } = req.body.imageData;
+  const imageDescription = req.body.imageDescription;
   const client = await clientPromise;
   const db = client.db('wilma-portfolio');
 
@@ -12,6 +13,7 @@ export async function postImageInfoToMongoDB(req: NextApiRequest, res: NextApiRe
     let newImage = new ImageModel();
     newImage.imageUrl = imageUrl;
     newImage.fileName = fileName;
+    newImage.imageDescription = imageDescription;
 
     const image = await db.collection('images').insertOne(newImage);
 
