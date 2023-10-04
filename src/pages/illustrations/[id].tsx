@@ -8,6 +8,7 @@ import { faAngleLeft, faAngleRight, faX } from '@fortawesome/free-solid-svg-icon
 export default function SelctedImage({ data }) {
   const [images, setImages] = useState<ImageDocument[]>(data.images);
   const [image, setImage] = useState<ImageDocument>();
+  const [imageDescription, setImageDescription] = useState<string>();
   const [disableNextButton, setDisableNextButton] = useState<boolean>(false);
   const [disablePreviousButton, setDisablePreviousButton] = useState<boolean>(false);
 
@@ -19,6 +20,7 @@ export default function SelctedImage({ data }) {
         images.map((image) => {
           if (image._id === router.query.id) {
             setImage(image);
+            setImageDescription(image.imageDescription);
           }
         });
       } catch (error) {
@@ -96,11 +98,7 @@ export default function SelctedImage({ data }) {
           </div>
         </div>
         <article className="selected-image-info">
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae possimus ea error vitae. Neque
-            architecto vel laboriosam nostrum ab assumenda, aliquid voluptatibus qui illo ipsam unde fuga amet itaque!
-            Officiis.
-          </p>
+          <p>{imageDescription}</p>
         </article>
       </div>
     </>

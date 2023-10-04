@@ -8,19 +8,21 @@ interface ImageDocument {
 const ImageUploadForm = () => {
   const [image, setImage] = useState<any>(null);
   const [imageInfo, setImageInfo] = useState<ImageDocument>();
+  const [imageDescription, setImageDescription] = useState('');
 
   const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
     const reader = new FileReader();
+    if (e.target.files) {
+      reader.readAsDataURL(e.target.files[0]);
+      setImageInfo({ name: e.target.files[0].name, type: e.target.files[0].type });
 
-    reader.readAsDataURL(e.target.files[0]);
-    setImageInfo({ name: e.target.files[0].name, type: e.target.files[0].type });
-
-    reader.onload = () => {
-      setImage(reader.result);
-    };
-    reader.onerror = () => {
-      console.log('reader.error', reader.error);
-    };
+      reader.onload = () => {
+        setImage(reader.result);
+      };
+      reader.onerror = () => {
+        console.log('reader.error', reader.error);
+      };
+    }
   };
 
   const uploadImage = async () => {
@@ -40,12 +42,18 @@ const ImageUploadForm = () => {
         if (response.ok) {
           console.log('Image uploaded successfully!');
 
-          const data = await response.json();
+          const imageData = await response.json();
 
           try {
             const responseFromMongoDB = await fetch('/api/postImageInfoToMongoDB', {
               method: 'POST',
-              body: JSON.stringify(data),
+              body: JSON.stringify({
+                imageData: imageData,
+                imageDescription: imageDescription,
+              }),
+              headers: {
+                'Content-Type': 'application/json',
+              },
             });
 
             if (responseFromMongoDB.ok) {
@@ -72,6 +80,13 @@ const ImageUploadForm = () => {
         {!image ? '' : <img className="image-for-upload" src={image} alt="alttext"></img>}
         <div className="upload-file-container">
           <input type="file" accept="image/*" onChange={handleSubmit} />
+
+          <label htmlFor="textarea">Skriv en bildtext</label>
+          <textarea
+            onChange={(e) => setImageDescription(e.target.value)}
+            className="image-description-textarea"
+            id="textarea"
+          />
           <button onClick={uploadImage}>Ladda upp bild</button>
         </div>
       </section>
