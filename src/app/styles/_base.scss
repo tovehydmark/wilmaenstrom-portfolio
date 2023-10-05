@@ -263,10 +263,14 @@ main {
 .image-description-textarea {
   height: 5rem;
   margin-bottom: 1rem;
+  max-width: 344px;
 }
 
 .admin-gallery {
   margin-top: 3rem;
+  h2 {
+    margin-bottom: 2rem;
+  }
 }
 
 .admin-gallery-view {

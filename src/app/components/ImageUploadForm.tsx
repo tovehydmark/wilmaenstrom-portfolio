@@ -78,7 +78,6 @@ const ImageUploadForm = () => {
   return (
     <>
       <section className="upload-file-section">
-        {' '}
         {!image ? '' : <img className="image-for-upload" src={image} alt="alttext"></img>}
         <div className="upload-file-container">
           <input type="file" accept="image/*" onChange={handleSubmit} />
