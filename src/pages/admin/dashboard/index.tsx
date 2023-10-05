@@ -1,13 +1,13 @@
+import { ImageDocument } from '@/app/api/models/Image';
 import ImageUploadForm from '@/app/components/ImageUploadForm';
-
-import Illustrations from '@/pages/illustrations';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 const Dashboard = () => {
-  //Todo: Enable to delete image on X
-
   const [userIsAuthenticated, setUserIsAuthenticated] = useState(false);
+  const [images, setImages] = useState<ImageDocument[]>();
+  const router = useRouter();
 
   const checkIfUserIsAuthenticated = () => {
     const token = localStorage.getItem('authToken');
@@ -15,7 +15,6 @@ const Dashboard = () => {
     if (!token) {
       return false;
     }
-
     try {
       setUserIsAuthenticated(true);
       return true;
@@ -25,14 +24,23 @@ const Dashboard = () => {
     }
   };
 
-  const router = useRouter();
-
   useEffect(() => {
     const isAuthenticated = checkIfUserIsAuthenticated();
-
     if (!isAuthenticated) {
       router.push('/admin');
     }
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await fetch('/api/getImages');
+        const data: any = await response.json();
+        setImages(data.images);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
   }, []);
 
   return (
@@ -49,7 +57,22 @@ const Dashboard = () => {
           </section>
           <section className="admin-gallery">
             <h2>Galleri</h2>
-            <Illustrations></Illustrations>
+            <section className="admin-gallery-view">
+              {images?.map((image) => {
+                return (
+                  <section key={JSON.stringify(image._id)} className="admin-gallery-image">
+                    <Image
+                      src={image.imageUrl}
+                      alt={image.fileName}
+                      width={300}
+                      height={300}
+                      style={{ objectFit: 'cover' }}
+                    ></Image>
+                    <p>{image.imageDescription}</p>
+                  </section>
+                );
+              })}
+            </section>
           </section>
         </div>
       ) : (

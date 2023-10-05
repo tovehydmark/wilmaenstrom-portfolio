@@ -260,9 +260,35 @@ main {
   border-radius: 0.5rem;
 }
 
+.image-description-textarea {
+  height: 5rem;
+  margin-bottom: 1rem;
+  max-width: 344px;
+}
+
 .admin-gallery {
   margin-top: 3rem;
+  h2 {
+    margin-bottom: 2rem;
+  }
 }
+
+.admin-gallery-view {
+  max-width: 100vw;
+  min-height: 100vh;
+  gap: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.admin-gallery-image {
+  border-top: 1px solid black;
+  margin: 0 auto;
+  padding-top: 2rem;
+  width: 300px;
+}
+
 //// Footer ////
 
 footer {

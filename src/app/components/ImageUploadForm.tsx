@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface ImageDocument {
   name: string;
@@ -9,6 +9,7 @@ const ImageUploadForm = () => {
   const [image, setImage] = useState<any>(null);
   const [imageInfo, setImageInfo] = useState<ImageDocument>();
   const [imageDescription, setImageDescription] = useState('');
+  const [imageIsSelected, setImageIsSelected] = useState(false);
 
   const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
     const reader = new FileReader();
@@ -23,6 +24,7 @@ const ImageUploadForm = () => {
         console.log('reader.error', reader.error);
       };
     }
+    setImageIsSelected(true);
   };
 
   const uploadImage = async () => {
@@ -57,9 +59,9 @@ const ImageUploadForm = () => {
             });
 
             if (responseFromMongoDB.ok) {
-              console.log('image saved to MongoDB');
+              alert('image saved to MongoDB');
             } else {
-              console.log('Something went wrong, the image was not saved to MongoDB');
+              alert('Something went wrong, the image was not saved to MongoDB');
             }
           } catch (error) {
             console.log('error', error);
@@ -76,18 +78,22 @@ const ImageUploadForm = () => {
   return (
     <>
       <section className="upload-file-section">
-        {' '}
         {!image ? '' : <img className="image-for-upload" src={image} alt="alttext"></img>}
         <div className="upload-file-container">
           <input type="file" accept="image/*" onChange={handleSubmit} />
-
-          <label htmlFor="textarea">Skriv en bildtext</label>
-          <textarea
-            onChange={(e) => setImageDescription(e.target.value)}
-            className="image-description-textarea"
-            id="textarea"
-          />
-          <button onClick={uploadImage}>Ladda upp bild</button>
+          {imageIsSelected ? (
+            <>
+              <label htmlFor="textarea">Skriv en bildtext</label>
+              <textarea
+                onChange={(e) => setImageDescription(e.target.value)}
+                className="image-description-textarea"
+                id="textarea"
+              />
+              <button onClick={uploadImage} disabled={imageDescription.length < 1}>
+                Ladda upp bild
+              </button>
+            </>
+          ) : null}
         </div>
       </section>
     </>
