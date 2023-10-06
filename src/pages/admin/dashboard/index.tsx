@@ -43,6 +43,26 @@ const Dashboard = () => {
     })();
   }, []);
 
+  const deleteImage = async (id) => {
+    try {
+      const response = await fetch('/api/deleteImageFromMongoDB', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(id),
+      });
+      if (response.ok) {
+        const text = await response.text();
+        console.log('Response:', text);
+      } else {
+        console.log('Error: Something went wrong.');
+      }
+    } catch (error) {
+      console.log('Error: ', error);
+    }
+  };
+
   return (
     <>
       {userIsAuthenticated ? (
@@ -61,6 +81,8 @@ const Dashboard = () => {
               {images?.map((image) => {
                 return (
                   <section key={JSON.stringify(image._id)} className="admin-gallery-image">
+                    <button onClick={() => deleteImage(image._id)}>Delete</button>
+
                     <Image
                       src={image.imageUrl}
                       alt={image.fileName}
