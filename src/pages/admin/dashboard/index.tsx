@@ -43,6 +43,45 @@ const Dashboard = () => {
     })();
   }, []);
 
+  const deleteImage = async (id, fileName) => {
+    try {
+      //Delete image from MongoDB
+      const response = await fetch('/api/deleteImageFromMongoDB', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(id),
+      });
+      if (response.ok) {
+        console.log('Image deleted from MongoDB!');
+
+        //Delete image from Azure
+        try {
+          const response = await fetch('/api/deleteImageFromAzure', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(fileName),
+          });
+
+          if (response.ok) {
+            console.log('Image deleted from Azure!');
+          } else {
+            console.log('Something went wrong, image not deleted from Azure');
+          }
+        } catch (error) {
+          console.log('Error', error);
+        }
+      } else {
+        console.log('Error: Something went wrong, image not deleted from MongoDB.');
+      }
+    } catch (error) {
+      console.log('Error: ', error);
+    }
+  };
+
   return (
     <>
       {userIsAuthenticated ? (
@@ -61,6 +100,8 @@ const Dashboard = () => {
               {images?.map((image) => {
                 return (
                   <section key={JSON.stringify(image._id)} className="admin-gallery-image">
+                    <button onClick={() => deleteImage(image._id, image.fileName)}>Delete</button>
+
                     <Image
                       src={image.imageUrl}
                       alt={image.fileName}

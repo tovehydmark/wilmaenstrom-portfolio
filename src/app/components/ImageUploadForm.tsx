@@ -15,7 +15,7 @@ const ImageUploadForm = () => {
     const reader = new FileReader();
     if (e.target.files) {
       reader.readAsDataURL(e.target.files[0]);
-      setImageInfo({ name: e.target.files[0].name, type: e.target.files[0].type });
+      setImageInfo({ name: e.target.files[0].name + Math.floor(Math.random() * 10000), type: e.target.files[0].type });
 
       reader.onload = () => {
         setImage(reader.result);
