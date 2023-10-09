@@ -5,9 +5,14 @@ const Contact = () => {
     <>
       <Layout>
         <section className="contact-container">
-          <h1>Contact</h1>
-          <p>Interested in my work? Contact me at:</p>
+          <h1>Kontakt</h1>
+          <p>
+            Om du är intresserad av att anställa mig på ditt företag eller köpa min konst, var god och hör av dig till
+            mig, för hur ska jag annars veta?? Jag är väl fan inte tankeläsare!
+          </p>
+          <br />
           <p>wilmaenstrom@gmail.com</p>
+          <br />
           <p>+4670 7770 7070</p>
         </section>
       </Layout>
