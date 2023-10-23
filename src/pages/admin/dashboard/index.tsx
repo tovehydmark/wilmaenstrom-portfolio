@@ -83,6 +83,23 @@ const Dashboard = () => {
     }
   };
 
+  const editImageDescription = async (id: ObjectId | undefined) => {
+    try {
+      const updatedImageDescriptionData = { updatedImageDescription: 'hej hejhejjjj', id: id };
+      const response = await fetch('/api/updateImageInformation', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedImageDescriptionData),
+      });
+
+      if (response.ok) {
+        alert('Bildbeskrivningen är uppdaterad!');
+      }
+    } catch {}
+  };
+
   return (
     <>
       {userIsAuthenticated ? (
@@ -102,7 +119,6 @@ const Dashboard = () => {
                 return (
                   <section key={JSON.stringify(image._id)} className="admin-gallery-image">
                     <button onClick={() => deleteImage(image._id, image.fileName)}>Delete</button>
-
                     <Image
                       src={image.imageUrl}
                       alt={image.fileName}
@@ -110,7 +126,8 @@ const Dashboard = () => {
                       height={300}
                       style={{ objectFit: 'cover' }}
                     ></Image>
-                    <p>{image.imageDescription}</p>
+                    <p>{image.imageDescription}</p>{' '}
+                    <button onClick={() => editImageDescription(image._id)}>Redigera</button>
                   </section>
                 );
               })}
