@@ -1,5 +1,6 @@
 import { ImageDocument } from '@/app/api/models/Image';
 import ImageUploadForm from '@/app/components/ImageUploadForm';
+import { ObjectId } from 'mongodb';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -29,7 +30,7 @@ const Dashboard = () => {
     if (!isAuthenticated) {
       router.push('/admin');
     }
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     (async () => {
@@ -43,7 +44,7 @@ const Dashboard = () => {
     })();
   }, []);
 
-  const deleteImage = async (id, fileName) => {
+  const deleteImage = async (id: ObjectId | undefined, fileName: string) => {
     try {
       //Delete image from MongoDB
       const response = await fetch('/api/deleteImageFromMongoDB', {
