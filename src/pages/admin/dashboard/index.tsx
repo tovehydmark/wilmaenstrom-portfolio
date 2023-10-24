@@ -1,6 +1,6 @@
 import { ImageDocument } from '@/app/api/models/Image';
 import ImageUploadForm from '@/app/components/ImageUploadForm';
-import Image from 'next/image';
+import PortfolioImage from '@/app/components/PortfolioImage';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -29,7 +29,7 @@ const Dashboard = () => {
     if (!isAuthenticated) {
       router.push('/admin');
     }
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     (async () => {
@@ -42,45 +42,6 @@ const Dashboard = () => {
       }
     })();
   }, []);
-
-  const deleteImage = async (id, fileName) => {
-    try {
-      //Delete image from MongoDB
-      const response = await fetch('/api/deleteImageFromMongoDB', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(id),
-      });
-      if (response.ok) {
-        console.log('Image deleted from MongoDB!');
-
-        //Delete image from Azure
-        try {
-          const response = await fetch('/api/deleteImageFromAzure', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(fileName),
-          });
-
-          if (response.ok) {
-            console.log('Image deleted from Azure!');
-          } else {
-            console.log('Something went wrong, image not deleted from Azure');
-          }
-        } catch (error) {
-          console.log('Error', error);
-        }
-      } else {
-        console.log('Error: Something went wrong, image not deleted from MongoDB.');
-      }
-    } catch (error) {
-      console.log('Error: ', error);
-    }
-  };
 
   return (
     <>
@@ -99,18 +60,13 @@ const Dashboard = () => {
             <section className="admin-gallery-view">
               {images?.map((image) => {
                 return (
-                  <section key={JSON.stringify(image._id)} className="admin-gallery-image">
-                    <button onClick={() => deleteImage(image._id, image.fileName)}>Delete</button>
-
-                    <Image
-                      src={image.imageUrl}
-                      alt={image.fileName}
-                      width={300}
-                      height={300}
-                      style={{ objectFit: 'cover' }}
-                    ></Image>
-                    <p>{image.imageDescription}</p>
-                  </section>
+                  <PortfolioImage
+                    key={JSON.stringify(image._id)}
+                    id={image._id}
+                    fileName={image.fileName}
+                    imageUrl={image.imageUrl}
+                    imageDescription={image?.imageDescription}
+                  ></PortfolioImage>
                 );
               })}
             </section>
