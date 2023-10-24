@@ -9,6 +9,8 @@ const Dashboard = () => {
   const [userIsAuthenticated, setUserIsAuthenticated] = useState(false);
   const [images, setImages] = useState<ImageDocument[]>();
   const router = useRouter();
+  const [updatingImageDescription, setUpdatingImageDescription] = useState(false);
+  const [imageDescription, setImageDescription] = useState('');
 
   const checkIfUserIsAuthenticated = () => {
     const token = localStorage.getItem('authToken');
@@ -42,7 +44,7 @@ const Dashboard = () => {
         console.log(error);
       }
     })();
-  }, []);
+  }, [updatingImageDescription]);
 
   const deleteImage = async (id: ObjectId | undefined, fileName: string) => {
     try {
@@ -85,7 +87,7 @@ const Dashboard = () => {
 
   const editImageDescription = async (id: ObjectId | undefined) => {
     try {
-      const updatedImageDescriptionData = { updatedImageDescription: 'hej hejhejjjj', id: id };
+      const updatedImageDescriptionData = { updatedImageDescription: imageDescription, id: id };
       const response = await fetch('/api/updateImageInformation', {
         method: 'POST',
         headers: {
@@ -96,6 +98,7 @@ const Dashboard = () => {
 
       if (response.ok) {
         alert('Bildbeskrivningen är uppdaterad!');
+        setUpdatingImageDescription(false);
       }
     } catch {}
   };
@@ -126,8 +129,21 @@ const Dashboard = () => {
                       height={300}
                       style={{ objectFit: 'cover' }}
                     ></Image>
-                    <p>{image.imageDescription}</p>{' '}
-                    <button onClick={() => editImageDescription(image._id)}>Redigera</button>
+                    {updatingImageDescription ? (
+                      <>
+                        <textarea
+                          defaultValue={image.imageDescription}
+                          onChange={(e) => setImageDescription(e.target.value)}
+                          cols={30}
+                          rows={10}
+                        ></textarea>
+                        <button onClick={() => editImageDescription(image._id)}>Spara</button>
+                      </>
+                    ) : (
+                      <p>{image.imageDescription}</p>
+                    )}
+
+                    <button onClick={() => setUpdatingImageDescription(true)}>Redigera</button>
                   </section>
                 );
               })}
