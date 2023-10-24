@@ -1,7 +1,6 @@
 import { ImageDocument } from '@/app/api/models/Image';
 import ImageUploadForm from '@/app/components/ImageUploadForm';
-import { ObjectId } from 'mongodb';
-import Image from 'next/image';
+import PortfolioImage from '@/app/components/PortfolioImage';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -9,8 +8,6 @@ const Dashboard = () => {
   const [userIsAuthenticated, setUserIsAuthenticated] = useState(false);
   const [images, setImages] = useState<ImageDocument[]>();
   const router = useRouter();
-  const [updatingImageDescription, setUpdatingImageDescription] = useState(false);
-  const [imageDescription, setImageDescription] = useState('');
 
   const checkIfUserIsAuthenticated = () => {
     const token = localStorage.getItem('authToken');
@@ -44,64 +41,7 @@ const Dashboard = () => {
         console.log(error);
       }
     })();
-  }, [updatingImageDescription]);
-
-  const deleteImage = async (id: ObjectId | undefined, fileName: string) => {
-    try {
-      //Delete image from MongoDB
-      const response = await fetch('/api/deleteImageFromMongoDB', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(id),
-      });
-      if (response.ok) {
-        console.log('Image deleted from MongoDB!');
-
-        //Delete image from Azure
-        try {
-          const response = await fetch('/api/deleteImageFromAzure', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(fileName),
-          });
-
-          if (response.ok) {
-            console.log('Image deleted from Azure!');
-          } else {
-            console.log('Something went wrong, image not deleted from Azure');
-          }
-        } catch (error) {
-          console.log('Error', error);
-        }
-      } else {
-        console.log('Error: Something went wrong, image not deleted from MongoDB.');
-      }
-    } catch (error) {
-      console.log('Error: ', error);
-    }
-  };
-
-  const editImageDescription = async (id: ObjectId | undefined) => {
-    try {
-      const updatedImageDescriptionData = { updatedImageDescription: imageDescription, id: id };
-      const response = await fetch('/api/updateImageInformation', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedImageDescriptionData),
-      });
-
-      if (response.ok) {
-        alert('Bildbeskrivningen är uppdaterad!');
-        setUpdatingImageDescription(false);
-      }
-    } catch {}
-  };
+  }, []);
 
   return (
     <>
@@ -120,31 +60,13 @@ const Dashboard = () => {
             <section className="admin-gallery-view">
               {images?.map((image) => {
                 return (
-                  <section key={JSON.stringify(image._id)} className="admin-gallery-image">
-                    <button onClick={() => deleteImage(image._id, image.fileName)}>Delete</button>
-                    <Image
-                      src={image.imageUrl}
-                      alt={image.fileName}
-                      width={300}
-                      height={300}
-                      style={{ objectFit: 'cover' }}
-                    ></Image>
-                    {updatingImageDescription ? (
-                      <>
-                        <textarea
-                          defaultValue={image.imageDescription}
-                          onChange={(e) => setImageDescription(e.target.value)}
-                          cols={30}
-                          rows={10}
-                        ></textarea>
-                        <button onClick={() => editImageDescription(image._id)}>Spara</button>
-                      </>
-                    ) : (
-                      <p>{image.imageDescription}</p>
-                    )}
-
-                    <button onClick={() => setUpdatingImageDescription(true)}>Redigera</button>
-                  </section>
+                  <PortfolioImage
+                    key={JSON.stringify(image._id)}
+                    id={image._id}
+                    fileName={image.fileName}
+                    imageUrl={image.imageUrl}
+                    imageDescription={image?.imageDescription}
+                  ></PortfolioImage>
                 );
               })}
             </section>
