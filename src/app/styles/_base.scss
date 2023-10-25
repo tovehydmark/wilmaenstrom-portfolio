@@ -209,6 +209,7 @@ main {
   }
 }
 
+//// Admin Dashboard ////
 .admin-greeting-section {
   margin-top: 2rem;
   h1 {
@@ -290,6 +291,50 @@ main {
   margin: 0 auto;
   padding-top: 2rem;
   width: 300px;
+}
+
+//// Admin dialog messages ////
+.dialog-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.dialog-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+.dialog-box-button-positioning {
+  display: flex;
+  align-items: center;
+}
+
+.confirm-delete {
+  background: rgb(136, 2, 2);
+  color: white;
+  padding: 10px;
+  margin-right: 4px;
+  border: none;
+  cursor: pointer;
+}
+.regret-delete {
+  background: rgb(5, 87, 17);
+  color: white;
+  padding: 10px;
+  margin-right: 4px;
+  border: none;
+  cursor: pointer;
 }
 
 //// Footer ////
