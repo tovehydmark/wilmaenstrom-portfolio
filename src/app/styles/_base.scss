@@ -337,6 +337,14 @@ main {
   cursor: pointer;
 }
 
+.admin-side-menu {
+  width: 100%;
+  background-color: red;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
 //// Footer ////
 
 footer {
