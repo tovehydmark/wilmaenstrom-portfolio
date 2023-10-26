@@ -1,9 +1,19 @@
+import Link from 'next/link';
+
 const SideMenu = () => {
   return (
     <section className="admin-side-menu">
-      <p>Bilder</p>
-      <p>Om</p>
-      <p>Kontakt</p>
+      <ul>
+        <li>
+          <Link href="/admin/dashboard/">Bildhantering</Link>
+        </li>
+        <li>
+          <Link href="/admin/dashboard/userInfo">Användarinfo</Link>
+        </li>
+        <li>
+          <Link href="/admin/dashboard/contactInfo">Kontaktuppgifter</Link>
+        </li>
+      </ul>
     </section>
   );
 };
