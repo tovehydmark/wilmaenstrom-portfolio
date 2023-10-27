@@ -1,17 +1,31 @@
 import { EducationDocument } from '@/app/api/models/education';
+import { WorkexperienceDocument } from '@/app/api/models/workexperience';
 import Layout from '@/app/components/layout';
 import { useEffect, useState } from 'react';
 
 const About = () => {
   const [education, setEducation] = useState<EducationDocument[]>();
+  const [workexperience, setWorkexperience] = useState<WorkexperienceDocument[]>();
 
   useEffect(() => {
     (async () => {
+      //Get education data
       try {
         const response = await fetch('/api/userinfo/getEducationInfo');
         const data: any = await response.json();
 
         setEducation(data.education);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+    (async () => {
+      //Get work experience data
+      try {
+        const response = await fetch('/api/userinfo/getWorkexperienceInfo');
+        const data: any = await response.json();
+
+        setWorkexperience(data.workexperience);
       } catch (error) {
         console.log(error);
       }
@@ -48,34 +62,19 @@ const About = () => {
           </section>
           <h2>Arbetserfarenhet</h2>
           <section className="work-experience-section">
-            <article>
-              <h3>Afroart</h3>
-              <h4>Stockholm</h4>
-
-              <p>
-                Här sålde jag olika saker och jag hade även en praktikant en gång som var jättebra på att märka varor
-                med en sån där pistol som man skjuter fast lappar med.
-              </p>
-            </article>
-            <article>
-              <h3>Lakritsroten</h3>
-              <h4>Stockholm</h4>
-
-              <p>
-                Åt jättemycket lakrits när jag jobbade här fast i smyg och så lurade jag turister och dumma svennar att
-                saltlakrits var sötlakrits och de spydde och jag skrattade åt dem högt. Fick sparken pga stal ur kassan
-                några gånger.
-              </p>
-            </article>
-            <article>
-              <h3>Bröd och salt</h3>
-              <h4>Stockholm</h4>
-
-              <p>
-                Bröd och salt. Ja du hör ju. Malde mjöl och saltade det och så bakade någon annan bröd och jag åt det
-                sen gick jag hem.
-              </p>
-            </article>
+            {workexperience ? (
+              workexperience.map((experience) => {
+                return (
+                  <article key={experience._id}>
+                    <h3>{experience.workplace}</h3>
+                    <h4>{experience.city}</h4>
+                    <p>{experience.description}</p>
+                  </article>
+                );
+              })
+            ) : (
+              <></>
+            )}
           </section>
         </section>
       </Layout>
