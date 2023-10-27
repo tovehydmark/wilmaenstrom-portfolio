@@ -1,5 +1,6 @@
 import SideMenu from '@/app/components/admin/SideMenu';
 import EducationCard from '@/app/components/admin/about/EducationCard';
+import WorkexperienceCard from '@/app/components/admin/about/WorkexperienceCard';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
@@ -7,6 +8,7 @@ const UserInfo = () => {
   const [userIsAuthenticated, setUserIsAuthenticated] = useState(false);
   const router = useRouter();
   const [addEducation, setAddEducation] = useState(false);
+  const [addWorkexperience, setAddWorkexperience] = useState(false);
 
   const checkIfUserIsAuthenticated = () => {
     const token = localStorage.getItem('authToken');
@@ -30,16 +32,26 @@ const UserInfo = () => {
     }
   }, [router]);
   //Run useEffect to rerender component with new data after data is saved
-  useEffect(() => {}, [addEducation]);
+  useEffect(() => {}, [addEducation, addWorkexperience]);
 
   return (
     <>
       {userIsAuthenticated ? (
         <>
           <SideMenu></SideMenu>
-          Om mig PAGE
+          <h1>Om mig</h1>
+          <p>Här kan du lägga till och uppdatera information om dig.</p>
+          <h2>Utbildning</h2>
           <button onClick={() => setAddEducation(true)}>Lägg till utbildning</button>
           {addEducation ? <EducationCard onSave={() => setAddEducation(false)}></EducationCard> : <></>}
+
+          <h2>Arbetserfarenhet</h2>
+          <button onClick={() => setAddWorkexperience(true)}>Lägg till arbetserfarenhet</button>
+          {addWorkexperience ? (
+            <WorkexperienceCard onSave={() => setAddWorkexperience(false)}></WorkexperienceCard>
+          ) : (
+            <></>
+          )}
         </>
       ) : (
         <div>Loading...</div>
