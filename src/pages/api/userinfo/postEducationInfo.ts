@@ -3,8 +3,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { EducationModel } from '@/app/api/models';
 
 export async function postEducationInfo(req: NextApiRequest, res: NextApiResponse) {
-  console.log('req.body', req.body);
-
   const { degree, school, description } = req.body;
   const client = await clientPromise;
   const db = client.db('wilma-portfolio');
