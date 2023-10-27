@@ -3,8 +3,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { WorkexperienceModel } from '@/app/api/models';
 
 export async function postWorkexperienceInfo(req: NextApiRequest, res: NextApiResponse) {
-  console.log('req.body', req.body);
-
   const { workplace, city, description } = req.body;
   const client = await clientPromise;
   const db = client.db('wilma-portfolio');
