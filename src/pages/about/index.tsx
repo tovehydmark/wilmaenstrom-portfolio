@@ -1,6 +1,23 @@
+import { EducationDocument } from '@/app/api/models/education';
 import Layout from '@/app/components/layout';
+import { useEffect, useState } from 'react';
 
 const About = () => {
+  const [education, setEducation] = useState<EducationDocument[]>();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await fetch('/api/userinfo/getEducationInfo');
+        const data: any = await response.json();
+
+        setEducation(data.education);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
+
   return (
     <>
       <Layout>
@@ -15,33 +32,19 @@ const About = () => {
           </article>
           <h2>Utbildning</h2>
           <section className="education-section">
-            <article>
-              <h3>Digital humaniora - Master</h3>
-              <h4>Uppsala Universitet</h4>
-              <p>
-                Satt vid datorn och knappade samtidigt som jag låtsades att läraren var full. Egentligen var det bara en
-                ursäkt för jag var full själv men det sa jag inte till någon. Fick ändå helt ok betyg med hjälp av en
-                såndär person som man betalar för att de ska skriva ens uppsatser.
-              </p>
-            </article>
-
-            <article>
-              <h3>Konsthistoria - Kandidat</h3>
-              <h4>Uppsala Universitet</h4>
-              Den här utbildningen tog jag bara för att jag tänkte att den kan vara bra att ha när man söker jobb inom
-              konst men vad vet jag. Önskar man inte behövde utbilda sig så jävla mycket fast jag tycker ju i och för
-              sig att det är kul för man behöver inte göra annat än att stirra på läraren och le för att få bra betyg.
-              Det lärde jag mig.
-            </article>
-            <article>
-              <h3>Etnologi - Kandidat </h3>
-              <h4>Uppsala Universitet</h4>
-              <p>
-                Den här utbildningen tog jag bara för att det är kul att få studera människor och deras beteenden som är
-                helt sjuka ibland men ibland är de inte så konstiga som jag trodde innan så det kanske var bra att jag
-                pluggade detta ändå eftersom jag inte visste att det finns normala människor också.
-              </p>
-            </article>
+            {education ? (
+              education.map((edu) => {
+                return (
+                  <article key={edu._id}>
+                    <h3>{edu.degree}</h3>
+                    <h4>{edu.school}</h4>
+                    <p>{edu.description}</p>
+                  </article>
+                );
+              })
+            ) : (
+              <></>
+            )}
           </section>
           <h2>Arbetserfarenhet</h2>
           <section className="work-experience-section">
