@@ -1,6 +1,7 @@
 import { ImageDocument } from '@/app/api/models/Image';
 import ImageUploadForm from '@/app/components/ImageUploadForm';
 import PortfolioImage from '@/app/components/PortfolioImage';
+import SideMenu from '@/app/components/admin/SideMenu';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -46,32 +47,35 @@ const Dashboard = () => {
   return (
     <>
       {userIsAuthenticated ? (
-        <div>
-          <section className="admin-greeting-section">
-            <h1>Välkommen, Wilma!</h1>
-            <p>Här kan du ladda upp nya bilder och hantera de bilder du laddat upp innan.</p>
-          </section>
-          <section className="admin-upload-image-section">
-            <h2>Ladda upp ny bild</h2>
-            <ImageUploadForm></ImageUploadForm>
-          </section>
-          <section className="admin-gallery">
-            <h2>Galleri</h2>
-            <section className="admin-gallery-view">
-              {images?.map((image) => {
-                return (
-                  <PortfolioImage
-                    key={JSON.stringify(image._id)}
-                    id={image._id}
-                    fileName={image.fileName}
-                    imageUrl={image.imageUrl}
-                    imageDescription={image?.imageDescription}
-                  ></PortfolioImage>
-                );
-              })}
+        <>
+          <div>
+            <SideMenu></SideMenu>
+            <section className="admin-greeting-section">
+              <h1>Välkommen, Wilma!</h1>
+              <p>Här kan du ladda upp nya bilder och hantera de bilder du laddat upp innan.</p>
             </section>
-          </section>
-        </div>
+            <section className="admin-upload-image-section">
+              <h2>Ladda upp ny bild</h2>
+              <ImageUploadForm></ImageUploadForm>
+            </section>
+            <section className="admin-gallery">
+              <h2>Galleri</h2>
+              <section className="admin-gallery-view">
+                {images?.map((image) => {
+                  return (
+                    <PortfolioImage
+                      key={JSON.stringify(image._id)}
+                      id={image._id}
+                      fileName={image.fileName}
+                      imageUrl={image.imageUrl}
+                      imageDescription={image?.imageDescription}
+                    ></PortfolioImage>
+                  );
+                })}
+              </section>
+            </section>
+          </div>
+        </>
       ) : (
         <div>Loading...</div>
       )}
