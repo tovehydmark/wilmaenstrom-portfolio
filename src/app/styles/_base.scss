@@ -339,10 +339,24 @@ main {
 
 .admin-side-menu {
   width: 100%;
-  background-color: red;
   display: flex;
-  justify-content: space-between;
-  margin-top: 1rem;
+  border-bottom: #000000 1px solid;
+  border-top: #000000 1px solid;
+  padding: 0.5rem;
+  ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 0;
+    width: 100%;
+    justify-content: space-around;
+    li {
+      a {
+        color: #000000;
+      }
+    }
+  }
 }
 
 //// Footer ////
