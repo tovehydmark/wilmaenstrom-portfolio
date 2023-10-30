@@ -1,3 +1,5 @@
+import { EducationDocument } from '@/app/api/models/education';
+import { WorkexperienceDocument } from '@/app/api/models/workexperience';
 import SideMenu from '@/app/components/admin/SideMenu';
 import EducationCard from '@/app/components/admin/about/EducationCard';
 import WorkexperienceCard from '@/app/components/admin/about/WorkexperienceCard';
@@ -9,6 +11,8 @@ const UserInfo = () => {
   const router = useRouter();
   const [addEducation, setAddEducation] = useState(false);
   const [addWorkexperience, setAddWorkexperience] = useState(false);
+  const [education, setEducation] = useState<EducationDocument[]>();
+  const [workexperience, setWorkexperience] = useState<WorkexperienceDocument[]>();
 
   const checkIfUserIsAuthenticated = () => {
     const token = localStorage.getItem('authToken');
@@ -31,8 +35,31 @@ const UserInfo = () => {
       router.push('/admin');
     }
   }, [router]);
-  //Run useEffect to rerender component with new data after data is saved
-  useEffect(() => {}, [addEducation, addWorkexperience]);
+
+  useEffect(() => {
+    (async () => {
+      //Get education data
+      try {
+        const response = await fetch('/api/userinfo/getEducationInfo');
+        const data: any = await response.json();
+
+        setEducation(data.education);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+    (async () => {
+      //Get work experience data
+      try {
+        const response = await fetch('/api/userinfo/getWorkexperienceInfo');
+        const data: any = await response.json();
+
+        setWorkexperience(data.workexperience);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, [addEducation, addWorkexperience]);
 
   return (
     <>
@@ -45,6 +72,22 @@ const UserInfo = () => {
           <button onClick={() => setAddEducation(true)}>Lägg till utbildning</button>
           {addEducation ? <EducationCard onSave={() => setAddEducation(false)}></EducationCard> : <></>}
 
+          <section className="education-section">
+            {education ? (
+              education.map((edu) => {
+                return (
+                  <article key={edu._id}>
+                    <h3>{edu.degree}</h3>
+                    <h4>{edu.school}</h4>
+                    <p>{edu.description}</p>
+                  </article>
+                );
+              })
+            ) : (
+              <></>
+            )}
+          </section>
+
           <h2>Arbetserfarenhet</h2>
           <button onClick={() => setAddWorkexperience(true)}>Lägg till arbetserfarenhet</button>
           {addWorkexperience ? (
@@ -52,6 +95,21 @@ const UserInfo = () => {
           ) : (
             <></>
           )}
+          <section className="work-experience-section">
+            {workexperience ? (
+              workexperience.map((experience) => {
+                return (
+                  <article key={experience._id}>
+                    <h3>{experience.workplace}</h3>
+                    <h4>{experience.city}</h4>
+                    <p>{experience.description}</p>
+                  </article>
+                );
+              })
+            ) : (
+              <></>
+            )}
+          </section>
         </>
       ) : (
         <div>Loading...</div>
