@@ -33,21 +33,22 @@ const EducationCard = ({ onSave }) => {
     } catch (error) {
       console.log('error', error);
     }
-
-    console.log('dataToSend', dataToSend);
   };
 
   return (
     <>
-      <form onSubmit={(e) => saveData(e)}>
+      <form onSubmit={(e) => saveData(e)} className="about-admin-cards">
         <label htmlFor="course">Kurs</label>
         <input type="text" name="course" onChange={(e) => setDegree(e.target.value)} />
         <label htmlFor="school">Skola</label>
         <input type="text" name="school" onChange={(e) => setSchool(e.target.value)} />
         <label htmlFor="description">Beskrivning</label>
-        <input type="text" name="description" onChange={(e) => setDescription(e.target.value)} />
-
-        <input type="submit" value="Spara" />
+        <textarea rows={5} name="description" onChange={(e) => setDescription(e.target.value)} />
+        <div>
+          <button className="primary-btn right-align" type="submit" value="Spara">
+            Spara
+          </button>
+        </div>
       </form>
     </>
   );
