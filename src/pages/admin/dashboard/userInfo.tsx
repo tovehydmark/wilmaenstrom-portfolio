@@ -14,6 +14,7 @@ const UserInfo = () => {
   const [addAbout, setAddAbout] = useState(false);
   const [addEducation, setAddEducation] = useState(false);
   const [addWorkexperience, setAddWorkexperience] = useState(false);
+  const [about, setAbout] = useState<string>('');
   const [education, setEducation] = useState<EducationDocument[]>();
   const [workexperience, setWorkexperience] = useState<WorkexperienceDocument[]>();
 
@@ -41,6 +42,18 @@ const UserInfo = () => {
 
   useEffect(() => {
     (async () => {
+      //Get about data
+      try {
+        const response = await fetch('/api/userinfo/getAboutInfo');
+        const data: any = await response.json();
+        if (data.about.description) {
+          setAbout(data.about.description);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+    (async () => {
       //Get education data
       try {
         const response = await fetch('/api/userinfo/getEducationInfo');
@@ -62,7 +75,7 @@ const UserInfo = () => {
         console.log(error);
       }
     })();
-  }, [addEducation, addWorkexperience]);
+  }, [addAbout, addEducation, addWorkexperience]);
 
   return (
     <>
@@ -73,9 +86,10 @@ const UserInfo = () => {
 
             <h1>Om mig</h1>
             <button onClick={() => setAddAbout(!addAbout)} className="primary-btn center">
-              {!addAbout ? 'Lägg till om dig' : 'Avbryt'}
+              {!addAbout ? 'Redigera om dig' : 'Avbryt'}
             </button>
-            {addAbout ? <AboutCard onSave={() => setAddAbout(false)}></AboutCard> : <></>}
+            {addAbout ? <AboutCard aboutInfo={about} onSave={() => setAddAbout(false)}></AboutCard> : <></>}
+            {about ? <p>{about}</p> : <></>}
 
             <h2>Utbildning</h2>
             <button onClick={() => setAddEducation(!addEducation)} className="primary-btn center">
