@@ -1,6 +1,6 @@
-import clientPromise from '@/app/lib/mongodb';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { EducationModel } from '@/app/api/models';
+import clientPromise from '@/app/lib/mongodb';
+import AboutModel, { AboutDocument } from '@/app/api/models/about';
 
 export async function postAboutInfo(req: NextApiRequest, res: NextApiResponse) {
   const { description } = req.body;
@@ -8,16 +8,30 @@ export async function postAboutInfo(req: NextApiRequest, res: NextApiResponse) {
   const db = client.db('wilma-portfolio');
 
   try {
-    let about = new EducationModel();
-    about.description = description;
+    const aboutCollection = db.collection<AboutDocument>('about');
 
-    const education = await db.collection('about').insertOne(about);
+    const updateResult = await aboutCollection.updateOne({}, { $set: { description } });
 
-    res.status(201).send({ data: education });
+    if (updateResult.modifiedCount === 1) {
+      return res.status(200).json({ message: 'About information updated successfully' });
+    } else {
+      //This is run when the user hasn't yet created any description and the DB is empty
+      try {
+        let about = new AboutModel();
+        about.description = description;
+
+        const education = await db.collection('about').insertOne(about);
+
+        res.status(201).send({ data: education });
+      } catch (error) {
+        console.log('error', error);
+
+        res.status(401).send({ error: error });
+      }
+    }
   } catch (error) {
-    console.log('error', error);
-
-    res.status(401).send({ error: error });
+    console.error('Error:', error);
+    return res.status(500).json({ error: 'Internal server error' });
   }
 }
 
