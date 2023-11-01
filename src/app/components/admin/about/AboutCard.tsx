@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-const AboutCard = ({ onSave }) => {
-  const [about, setAbout] = useState<string>('');
+const AboutCard = ({ aboutInfo, onSave }) => {
+  const [about, setAbout] = useState<string>(aboutInfo);
   const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
