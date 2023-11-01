@@ -70,8 +70,8 @@ const UserInfo = () => {
             <h1>Om mig</h1>
             <p>Här kan du lägga till och uppdatera information om dig.</p>
             <h2>Utbildning</h2>
-            <button onClick={() => setAddEducation(true)} className="primary-btn center">
-              Lägg till utbildning
+            <button onClick={() => setAddEducation(!addEducation)} className="primary-btn center">
+              {!addEducation ? 'Lägg till utbildning' : 'Avbryt'}
             </button>
             {addEducation ? <EducationCard onSave={() => setAddEducation(false)}></EducationCard> : <></>}
 
@@ -92,8 +92,8 @@ const UserInfo = () => {
             </section>
 
             <h2>Arbetserfarenhet</h2>
-            <button onClick={() => setAddWorkexperience(true)} className="primary-btn center">
-              Lägg till arbetserfarenhet
+            <button onClick={() => setAddWorkexperience(!addWorkexperience)} className="primary-btn center">
+              {!addWorkexperience ? 'Lägg till arbetserfarenhet' : 'Avbryt'}
             </button>
             {addWorkexperience ? (
               <WorkexperienceCard onSave={() => setAddWorkexperience(false)}></WorkexperienceCard>
