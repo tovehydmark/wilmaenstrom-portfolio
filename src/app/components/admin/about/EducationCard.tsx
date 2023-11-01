@@ -1,9 +1,14 @@
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const EducationCard = ({ onSave }) => {
   const [degree, setDegree] = useState('');
   const [school, setSchool] = useState('');
   const [description, setDescription] = useState('');
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  useEffect(() => {
+    setIsFormValid(degree.trim() !== '' && school.trim() !== '' && description.trim() !== '');
+  }, [degree, school, description]);
 
   const saveData = async (e) => {
     e.preventDefault();
@@ -25,7 +30,6 @@ const EducationCard = ({ onSave }) => {
 
       if (response.ok) {
         const data = await response.json();
-
         onSave();
       } else {
         console.log('something went wrong', response);
@@ -39,13 +43,13 @@ const EducationCard = ({ onSave }) => {
     <>
       <form onSubmit={(e) => saveData(e)} className="about-admin-cards">
         <label htmlFor="course">Kurs</label>
-        <input type="text" name="course" onChange={(e) => setDegree(e.target.value)} />
+        <input type="text" name="course" value={degree} onChange={(e) => setDegree(e.target.value)} />
         <label htmlFor="school">Skola</label>
-        <input type="text" name="school" onChange={(e) => setSchool(e.target.value)} />
+        <input type="text" name="school" value={school} onChange={(e) => setSchool(e.target.value)} />
         <label htmlFor="description">Beskrivning</label>
-        <textarea rows={5} name="description" onChange={(e) => setDescription(e.target.value)} />
+        <textarea rows={5} name="description" value={description} onChange={(e) => setDescription(e.target.value)} />
         <div>
-          <button className="primary-btn right-align" type="submit" value="Spara">
+          <button className="primary-btn right-align" type="submit" value="Spara" disabled={!isFormValid}>
             Spara
           </button>
         </div>
@@ -53,4 +57,5 @@ const EducationCard = ({ onSave }) => {
     </>
   );
 };
+
 export default EducationCard;
