@@ -38,6 +38,21 @@ main {
   margin: 0 auto;
 }
 
+.primary-btn {
+  width: fit-content;
+  padding: 0.5rem;
+  border-radius: 15px;
+  border: none;
+  color: white;
+  background-color: #171717;
+}
+
+.center {
+  margin: 1rem auto;
+}
+.right-align {
+  float: right;
+}
 //// Illustrations page ////
 .illustration-container {
   padding-top: 2rem;
@@ -291,6 +306,22 @@ main {
   margin: 0 auto;
   padding-top: 2rem;
   width: 300px;
+}
+
+//// Admin about section ////
+
+.about-admin-cards {
+  display: flex;
+  flex-direction: column;
+  label {
+    margin-top: 0.5rem;
+  }
+  input {
+    padding: 0.3rem;
+  }
+  textarea {
+    margin-bottom: 1rem;
+  }
 }
 
 //// Admin dialog messages ////
