@@ -2,5 +2,6 @@ export const ModelName = {
   User: 'user',
   Image: 'image',
   Education: 'education',
-  Workexperience:'workexperience'
+  Workexperience: 'workexperience',
+  About: 'about',
 } as const;
