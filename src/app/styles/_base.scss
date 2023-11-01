@@ -46,6 +46,14 @@ main {
   color: white;
   background-color: #171717;
 }
+.primary-btn:hover {
+  cursor: pointer;
+}
+.primary-btn:disabled {
+  cursor: auto;
+  background-color: #9a9a9a;
+  color: rgb(211, 210, 210);
+}
 
 .center {
   margin: 1rem auto;
