@@ -1,6 +1,8 @@
+import { AboutDocument } from '@/app/api/models/about';
 import { EducationDocument } from '@/app/api/models/education';
 import { WorkexperienceDocument } from '@/app/api/models/workexperience';
 import SideMenu from '@/app/components/admin/SideMenu';
+import AboutCard from '@/app/components/admin/about/AboutCard';
 import EducationCard from '@/app/components/admin/about/EducationCard';
 import WorkexperienceCard from '@/app/components/admin/about/WorkexperienceCard';
 import { useRouter } from 'next/router';
@@ -9,6 +11,7 @@ import React, { useEffect, useState } from 'react';
 const UserInfo = () => {
   const [userIsAuthenticated, setUserIsAuthenticated] = useState(false);
   const router = useRouter();
+  const [addAbout, setAddAbout] = useState(false);
   const [addEducation, setAddEducation] = useState(false);
   const [addWorkexperience, setAddWorkexperience] = useState(false);
   const [education, setEducation] = useState<EducationDocument[]>();
@@ -67,8 +70,13 @@ const UserInfo = () => {
         <>
           <section className="about-container">
             <SideMenu></SideMenu>
+
             <h1>Om mig</h1>
-            <p>Här kan du lägga till och uppdatera information om dig.</p>
+            <button onClick={() => setAddAbout(!addAbout)} className="primary-btn center">
+              {!addAbout ? 'Lägg till om dig' : 'Avbryt'}
+            </button>
+            {addAbout ? <AboutCard onSave={() => setAddAbout(false)}></AboutCard> : <></>}
+
             <h2>Utbildning</h2>
             <button onClick={() => setAddEducation(!addEducation)} className="primary-btn center">
               {!addEducation ? 'Lägg till utbildning' : 'Avbryt'}
