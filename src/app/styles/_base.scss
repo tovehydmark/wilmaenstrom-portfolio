@@ -38,6 +38,29 @@ main {
   margin: 0 auto;
 }
 
+.primary-btn {
+  width: fit-content;
+  padding: 0.5rem;
+  border-radius: 15px;
+  border: none;
+  color: white;
+  background-color: #171717;
+}
+.primary-btn:hover {
+  cursor: pointer;
+}
+.primary-btn:disabled {
+  cursor: auto;
+  background-color: #9a9a9a;
+  color: rgb(211, 210, 210);
+}
+
+.center {
+  margin: 1rem auto;
+}
+.right-align {
+  float: right;
+}
 //// Illustrations page ////
 .illustration-container {
   padding-top: 2rem;
@@ -293,6 +316,22 @@ main {
   width: 300px;
 }
 
+//// Admin about section ////
+
+.about-admin-cards {
+  display: flex;
+  flex-direction: column;
+  label {
+    margin-top: 0.5rem;
+  }
+  input {
+    padding: 0.3rem;
+  }
+  textarea {
+    margin-bottom: 1rem;
+  }
+}
+
 //// Admin dialog messages ////
 .dialog-container {
   position: fixed;
@@ -339,10 +378,24 @@ main {
 
 .admin-side-menu {
   width: 100%;
-  background-color: red;
   display: flex;
-  justify-content: space-between;
-  margin-top: 1rem;
+  border-bottom: #000000 1px solid;
+  border-top: #000000 1px solid;
+  padding: 0.5rem;
+  ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 0;
+    width: 100%;
+    justify-content: space-around;
+    li {
+      a {
+        color: #000000;
+      }
+    }
+  }
 }
 
 //// Footer ////

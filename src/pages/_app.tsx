@@ -19,7 +19,8 @@ function MyApp({ Component, pageProps }) {
           font-family: ${montserrat.style.fontFamily};
         }
         h1,
-        h2 {
+        h2,
+        h3 {
           font-family: ${playfair_display.style.fontFamily};
         }
       `}</style>
