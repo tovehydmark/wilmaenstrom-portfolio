@@ -46,7 +46,7 @@ hr {
   border: none;
   border-top: 5px dotted #d1d0d0;
   width: 20%;
-  margin: 5rem auto 0;
+  margin: 3rem auto 0;
 }
 
 .primary-btn {
@@ -64,6 +64,14 @@ hr {
   cursor: auto;
   background-color: #9a9a9a;
   color: rgb(211, 210, 210);
+}
+
+.secondary-btn {
+  width: fit-content;
+  padding: 0.5rem;
+  border-radius: 15px;
+  color: black;
+  background-color: #ffffff;
 }
 
 .center {
@@ -158,18 +166,14 @@ hr {
   h1 {
     margin-top: 2rem;
     font-size: 1.5rem;
-    border-top: 1px dashed black;
-    border-bottom: 1px dashed black;
     padding: 0.5rem;
     text-align: center;
-    margin-bottom: 2rem;
+    margin-top: 2rem;
   }
 
   h2 {
     margin-top: 2rem;
     font-size: 1.5rem;
-    border-top: 1px dashed black;
-    border-bottom: 1px dashed black;
     padding: 0.5rem;
     text-align: center;
   }
@@ -250,9 +254,10 @@ hr {
 }
 
 .admin-greeting-section {
-  margin-top: 2rem;
+  margin-top: 4rem;
   h1 {
     margin-bottom: 1rem;
+    font-size: 2rem;
   }
 }
 

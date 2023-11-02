@@ -85,14 +85,21 @@ const UserInfo = () => {
             <SideMenu></SideMenu>
 
             <h1>Om mig</h1>
-            <button onClick={() => setAddAbout(!addAbout)} className="primary-btn center">
-              {!addAbout ? 'Redigera om mig' : 'Avbryt'}
-            </button>
-            {addAbout ? <AboutCard aboutInfo={about} onSave={() => setAddAbout(false)}></AboutCard> : <></>}
-            {about ? <p>{about}</p> : <></>}
 
+            {addAbout ? <AboutCard aboutInfo={about} onSave={() => setAddAbout(false)}></AboutCard> : <></>}
+            {about && !addAbout ? <p>{about}</p> : <></>}
+            <button
+              onClick={() => setAddAbout(!addAbout)}
+              className={!addAbout ? 'primary-btn center' : 'secondary-btn center'}
+            >
+              {!addAbout ? 'Redigera' : 'Avbryt'}
+            </button>
+            <hr />
             <h2>Utbildning</h2>
-            <button onClick={() => setAddEducation(!addEducation)} className="primary-btn center">
+            <button
+              onClick={() => setAddEducation(!addEducation)}
+              className={!addEducation ? 'primary-btn center' : 'secondary-btn center'}
+            >
               {!addEducation ? 'Lägg till utbildning' : 'Avbryt'}
             </button>
             {addEducation ? <EducationCard onSave={() => setAddEducation(false)}></EducationCard> : <></>}
@@ -112,9 +119,12 @@ const UserInfo = () => {
                 <></>
               )}
             </section>
-
+            <hr />
             <h2>Arbetserfarenhet</h2>
-            <button onClick={() => setAddWorkexperience(!addWorkexperience)} className="primary-btn center">
+            <button
+              onClick={() => setAddWorkexperience(!addWorkexperience)}
+              className={!addWorkexperience ? 'primary-btn center' : 'secondary-btn center'}
+            >
               {!addWorkexperience ? 'Lägg till arbetserfarenhet' : 'Avbryt'}
             </button>
             {addWorkexperience ? (
