@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import Dialog from './Dialog';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
   id: string | undefined;
@@ -88,26 +90,40 @@ const PortfolioImage = (Props: Props) => {
 
   return (
     <section key={JSON.stringify(id)} className="admin-gallery-image">
-      <button onClick={deleteImage}>Radera bild</button>
-      {dialog.isLoading && <Dialog onDialog={areYouSureDeleteImage} message={dialog.message} />}
-
       <img src={imageUrl} alt={fileName} width={300} height={300} style={{ objectFit: 'cover' }}></img>
       {updatingImageDescription ? (
         <div className="image-description-textarea">
-          {' '}
           <textarea
             defaultValue={imageDescription}
             onChange={(e) => setNewImageDescription(e.target.value)}
             cols={30}
             rows={10}
           ></textarea>
-          <button onClick={() => editImageDescription(id)}>Spara</button>
+          <div className="btn-layout">
+            <button className="secondary-btn" onClick={() => setUpdatingImageDescription(false)}>
+              Avbryt
+            </button>
+            <button className="primary-btn" onClick={() => editImageDescription(id)}>
+              Spara
+            </button>
+          </div>
         </div>
       ) : (
         <p>{imageDescription}</p>
       )}
-
-      <button onClick={() => setUpdatingImageDescription(true)}>Redigera</button>
+      {!updatingImageDescription ? (
+        <div className="btn-layout">
+          <button className="icon-btn" onClick={deleteImage}>
+            <FontAwesomeIcon icon={faTrash} size="xl" />
+          </button>
+          {dialog.isLoading && <Dialog onDialog={areYouSureDeleteImage} message={dialog.message} />}{' '}
+          <button className="icon-btn" onClick={() => setUpdatingImageDescription(true)}>
+            <FontAwesomeIcon icon={faPen} size="xl" />
+          </button>
+        </div>
+      ) : (
+        <></>
+      )}
     </section>
   );
 };

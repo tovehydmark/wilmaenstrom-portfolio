@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 const Dashboard = () => {
   const [userIsAuthenticated, setUserIsAuthenticated] = useState(false);
   const [images, setImages] = useState<ImageDocument[]>();
+  const [uploadedNewImage, setUploadedNewImage] = useState<boolean>(false);
   const router = useRouter();
 
   const checkIfUserIsAuthenticated = () => {
@@ -42,22 +43,28 @@ const Dashboard = () => {
         console.log(error);
       }
     })();
-  }, []);
+  }, [uploadedNewImage]);
 
   return (
     <>
       {userIsAuthenticated ? (
         <>
-          <div>
+          <div className="dashboard-layout">
             <SideMenu></SideMenu>
             <section className="admin-greeting-section">
-              <h1>Välkommen, Wilma!</h1>
-              <p>Här kan du ladda upp nya bilder och hantera de bilder du laddat upp innan.</p>
+              <h1>Välkommen!</h1>
+              <p>
+                Här kan du ladda upp nya bilder och hantera de bilder du laddat upp innan. Bildtexten du skriver kommer
+                att visas bredvid bilden i galleriet då du klickar på den på din portfolio-sida.
+              </p>
             </section>
+            <hr />
             <section className="admin-upload-image-section">
               <h2>Ladda upp ny bild</h2>
-              <ImageUploadForm></ImageUploadForm>
+
+              <ImageUploadForm onSave={() => setUploadedNewImage(!uploadedNewImage)}></ImageUploadForm>
             </section>
+            <hr />
             <section className="admin-gallery">
               <h2>Galleri</h2>
               <section className="admin-gallery-view">
