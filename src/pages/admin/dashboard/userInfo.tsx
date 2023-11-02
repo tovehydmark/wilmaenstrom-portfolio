@@ -86,7 +86,7 @@ const UserInfo = () => {
 
             <h1>Om mig</h1>
             <button onClick={() => setAddAbout(!addAbout)} className="primary-btn center">
-              {!addAbout ? 'Redigera om dig' : 'Avbryt'}
+              {!addAbout ? 'Redigera om mig' : 'Avbryt'}
             </button>
             {addAbout ? <AboutCard aboutInfo={about} onSave={() => setAddAbout(false)}></AboutCard> : <></>}
             {about ? <p>{about}</p> : <></>}
