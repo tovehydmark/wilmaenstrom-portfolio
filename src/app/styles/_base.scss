@@ -74,6 +74,11 @@ hr {
   background-color: #ffffff;
 }
 
+.icon-btn {
+  background-color: transparent;
+  border: none;
+}
+
 .center {
   margin: 1rem auto;
 }
@@ -313,9 +318,6 @@ hr {
 
 .admin-gallery {
   margin-top: 3rem;
-  h2 {
-    margin-bottom: 2rem;
-  }
 }
 
 .admin-gallery-view {
@@ -328,10 +330,15 @@ hr {
 }
 
 .admin-gallery-image {
-  border-top: 1px solid black;
   margin: 0 auto;
   padding-top: 2rem;
   width: 300px;
+}
+
+.btn-layout {
+  padding-top: 1rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 //// Admin about section ////

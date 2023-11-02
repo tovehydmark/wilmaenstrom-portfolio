@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import Dialog from './Dialog';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
   id: string | undefined;
@@ -88,9 +90,6 @@ const PortfolioImage = (Props: Props) => {
 
   return (
     <section key={JSON.stringify(id)} className="admin-gallery-image">
-      <button onClick={deleteImage}>Radera bild</button>
-      {dialog.isLoading && <Dialog onDialog={areYouSureDeleteImage} message={dialog.message} />}
-
       <img src={imageUrl} alt={fileName} width={300} height={300} style={{ objectFit: 'cover' }}></img>
       {updatingImageDescription ? (
         <div className="image-description-textarea">
@@ -106,8 +105,15 @@ const PortfolioImage = (Props: Props) => {
       ) : (
         <p>{imageDescription}</p>
       )}
-
-      <button onClick={() => setUpdatingImageDescription(true)}>Redigera</button>
+      <div className="btn-layout">
+        <button className="icon-btn" onClick={deleteImage}>
+          <FontAwesomeIcon icon={faTrash} size="xl" />
+        </button>
+        {dialog.isLoading && <Dialog onDialog={areYouSureDeleteImage} message={dialog.message} />}{' '}
+        <button className="icon-btn" onClick={() => setUpdatingImageDescription(true)}>
+          <FontAwesomeIcon icon={faPen} size="xl" />
+        </button>
+      </div>
     </section>
   );
 };
