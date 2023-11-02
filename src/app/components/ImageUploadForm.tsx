@@ -80,16 +80,21 @@ const ImageUploadForm = () => {
       <section className="upload-file-section">
         {!image ? '' : <img className="image-for-upload" src={image} alt="alttext"></img>}
         <div className="upload-file-container">
-          <input type="file" accept="image/*" onChange={handleSubmit} />
+          <label htmlFor="file-upload" className="primary-btn">
+            Välj fil{' '}
+          </label>
+          <input id="file-upload" type="file" accept="image/*" onChange={handleSubmit} />
           {imageIsSelected ? (
             <>
-              <label htmlFor="textarea">Skriv en bildtext</label>
+              <label className="image-description-label" htmlFor="textarea">
+                Skriv en bildtext
+              </label>
               <textarea
                 onChange={(e) => setImageDescription(e.target.value)}
                 className="image-description-textarea"
                 id="textarea"
               />
-              <button onClick={uploadImage} disabled={imageDescription.length < 1}>
+              <button onClick={uploadImage} disabled={imageDescription.length < 1} className="primary-btn">
                 Ladda upp bild
               </button>
             </>
