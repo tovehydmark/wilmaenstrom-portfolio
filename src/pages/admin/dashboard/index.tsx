@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 const Dashboard = () => {
   const [userIsAuthenticated, setUserIsAuthenticated] = useState(false);
   const [images, setImages] = useState<ImageDocument[]>();
+  const [uploadedNewImage, setUploadedNewImage] = useState<boolean>(false);
   const router = useRouter();
 
   const checkIfUserIsAuthenticated = () => {
@@ -42,7 +43,7 @@ const Dashboard = () => {
         console.log(error);
       }
     })();
-  }, []);
+  }, [uploadedNewImage]);
 
   return (
     <>
@@ -60,7 +61,8 @@ const Dashboard = () => {
             <hr />
             <section className="admin-upload-image-section">
               <h2>Ladda upp ny bild</h2>
-              <ImageUploadForm></ImageUploadForm>
+
+              <ImageUploadForm onSave={() => setUploadedNewImage(!uploadedNewImage)}></ImageUploadForm>
             </section>
             <hr />
             <section className="admin-gallery">

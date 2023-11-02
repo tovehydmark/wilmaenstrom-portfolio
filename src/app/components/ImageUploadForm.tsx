@@ -5,7 +5,7 @@ interface ImageDocument {
   type: string;
 }
 
-const ImageUploadForm = () => {
+const ImageUploadForm = ({ onSave }) => {
   const [image, setImage] = useState<any>(null);
   const [imageInfo, setImageInfo] = useState<ImageDocument>();
   const [imageDescription, setImageDescription] = useState('');
@@ -60,6 +60,9 @@ const ImageUploadForm = () => {
 
             if (responseFromMongoDB.ok) {
               alert('image saved to MongoDB');
+              onSave();
+              setImage(null);
+              setImageIsSelected(false);
             } else {
               alert('Something went wrong, the image was not saved to MongoDB');
             }
@@ -81,7 +84,7 @@ const ImageUploadForm = () => {
         {!image ? '' : <img className="image-for-upload" src={image} alt="alttext"></img>}
         <div className="upload-file-container">
           <label htmlFor="file-upload" className="primary-btn">
-            Välj fil{' '}
+            Välj fil
           </label>
           <input id="file-upload" type="file" accept="image/*" onChange={handleSubmit} />
           {imageIsSelected ? (
