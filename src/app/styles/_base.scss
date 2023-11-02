@@ -38,6 +38,17 @@ main {
   margin: 0 auto;
 }
 
+input[type='file'] {
+  display: none;
+}
+
+hr {
+  border: none;
+  border-top: 5px dotted #d1d0d0;
+  width: 20%;
+  margin: 5rem auto 0;
+}
+
 .primary-btn {
   width: fit-content;
   padding: 0.5rem;
@@ -233,6 +244,11 @@ main {
 }
 
 //// Admin Dashboard ////
+
+.dashboard-layout {
+  margin: 2rem 1rem;
+}
+
 .admin-greeting-section {
   margin-top: 2rem;
   h1 {
@@ -265,14 +281,6 @@ main {
     cursor: pointer;
   }
 
-  button {
-    border: 1px solid #000000;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
-    width: fit-content;
-  }
-
   button:hover {
     background-color: #cbc8c8;
     cursor: pointer;
@@ -287,8 +295,13 @@ main {
   border-radius: 0.5rem;
 }
 
+.image-description-label {
+  margin-top: 1rem;
+}
+
 .image-description-textarea {
   height: 5rem;
+  margin-top: 0.5rem;
   margin-bottom: 1rem;
   max-width: 344px;
 }
