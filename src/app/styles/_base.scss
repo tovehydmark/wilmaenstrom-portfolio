@@ -73,10 +73,16 @@ hr {
   color: black;
   background-color: #ffffff;
 }
+.secondary-btn:hover {
+  cursor: pointer;
+}
 
 .icon-btn {
   background-color: transparent;
   border: none;
+}
+.icon-btn:hover {
+  cursor: pointer;
 }
 
 .center {
@@ -310,10 +316,16 @@ hr {
 }
 
 .image-description-textarea {
-  height: 5rem;
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-  max-width: 344px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  textarea {
+    width: 100%;
+  }
+  button {
+    width: fit-content;
+    margin-top: 0.5rem;
+  }
 }
 
 .admin-gallery {
@@ -339,6 +351,7 @@ hr {
   padding-top: 1rem;
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 
 //// Admin about section ////

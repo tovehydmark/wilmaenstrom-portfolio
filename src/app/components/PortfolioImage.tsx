@@ -93,27 +93,37 @@ const PortfolioImage = (Props: Props) => {
       <img src={imageUrl} alt={fileName} width={300} height={300} style={{ objectFit: 'cover' }}></img>
       {updatingImageDescription ? (
         <div className="image-description-textarea">
-          {' '}
           <textarea
             defaultValue={imageDescription}
             onChange={(e) => setNewImageDescription(e.target.value)}
             cols={30}
             rows={10}
           ></textarea>
-          <button onClick={() => editImageDescription(id)}>Spara</button>
+          <div className="btn-layout">
+            <button className="secondary-btn" onClick={() => setUpdatingImageDescription(false)}>
+              Avbryt
+            </button>
+            <button className="primary-btn" onClick={() => editImageDescription(id)}>
+              Spara
+            </button>
+          </div>
         </div>
       ) : (
         <p>{imageDescription}</p>
       )}
-      <div className="btn-layout">
-        <button className="icon-btn" onClick={deleteImage}>
-          <FontAwesomeIcon icon={faTrash} size="xl" />
-        </button>
-        {dialog.isLoading && <Dialog onDialog={areYouSureDeleteImage} message={dialog.message} />}{' '}
-        <button className="icon-btn" onClick={() => setUpdatingImageDescription(true)}>
-          <FontAwesomeIcon icon={faPen} size="xl" />
-        </button>
-      </div>
+      {!updatingImageDescription ? (
+        <div className="btn-layout">
+          <button className="icon-btn" onClick={deleteImage}>
+            <FontAwesomeIcon icon={faTrash} size="xl" />
+          </button>
+          {dialog.isLoading && <Dialog onDialog={areYouSureDeleteImage} message={dialog.message} />}{' '}
+          <button className="icon-btn" onClick={() => setUpdatingImageDescription(true)}>
+            <FontAwesomeIcon icon={faPen} size="xl" />
+          </button>
+        </div>
+      ) : (
+        <></>
+      )}
     </section>
   );
 };
