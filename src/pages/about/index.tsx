@@ -1,13 +1,26 @@
+import { AboutDocument } from '@/app/api/models/about';
 import { EducationDocument } from '@/app/api/models/education';
 import { WorkexperienceDocument } from '@/app/api/models/workexperience';
 import Layout from '@/app/components/layout';
 import { useEffect, useState } from 'react';
 
 const About = () => {
+  const [aboutInfo, setAboutInfo] = useState<AboutDocument>();
   const [education, setEducation] = useState<EducationDocument[]>();
   const [workexperience, setWorkexperience] = useState<WorkexperienceDocument[]>();
 
   useEffect(() => {
+    (async () => {
+      //Get about data
+      try {
+        const response = await fetch('/api/userinfo/getAboutInfo');
+        const data: any = await response.json();
+
+        setAboutInfo(data.about.description);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
     (async () => {
       //Get education data
       try {
@@ -38,11 +51,7 @@ const About = () => {
         <section className="about-container">
           <h1>Om mig</h1>
           <article>
-            <p>
-              Jag heter Wilma, är en 22 år gammal bildkonstnär och gillar månalver. När jag var 25 år gammal upptäckte
-              jag BTS och sen dess finns ingen återvändo. Nu bor jag i Australien och vill inte annat än att stanna på
-              grund av alla asiater som bor här.
-            </p>
+            <p>{aboutInfo}</p>
           </article>
           <h2>Utbildning</h2>
           <section className="education-section">
