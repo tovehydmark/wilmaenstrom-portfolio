@@ -16,7 +16,7 @@ const About = () => {
         const response = await fetch('/api/userinfo/getAboutInfo');
         const data: any = await response.json();
 
-        setAboutInfo(data.about.description);
+        setAboutInfo(data.about);
       } catch (error) {
         console.log(error);
       }
@@ -49,11 +49,10 @@ const About = () => {
     <>
       <Layout>
         <section className="about-container">
-          <h1>Om mig</h1>
-          <article>
-            <p>{aboutInfo}</p>
-          </article>
-          <h2>Utbildning</h2>
+          {aboutInfo ? <h1>Om mig</h1> : null}
+          <article>{aboutInfo ? <p>{aboutInfo.description}</p> : null} </article>
+          {education ? <h2>Utbildning</h2> : null}
+
           <section className="education-section">
             {education ? (
               education.map((edu) => {
@@ -69,7 +68,7 @@ const About = () => {
               <></>
             )}
           </section>
-          <h2>Arbetserfarenhet</h2>
+          {workexperience ? <h2>Arbetserfarenhet</h2> : null}
           <section className="work-experience-section">
             {workexperience ? (
               workexperience.map((experience) => {
