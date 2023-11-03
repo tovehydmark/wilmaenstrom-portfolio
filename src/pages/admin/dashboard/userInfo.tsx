@@ -53,6 +53,9 @@ const UserInfo = () => {
         console.log(error);
       }
     })();
+  }, [addAbout]);
+
+  useEffect(() => {
     (async () => {
       //Get education data
       try {
@@ -64,6 +67,9 @@ const UserInfo = () => {
         console.log(error);
       }
     })();
+  }, [addEducation]);
+
+  useEffect(() => {
     (async () => {
       //Get work experience data
       try {
@@ -75,7 +81,7 @@ const UserInfo = () => {
         console.log(error);
       }
     })();
-  }, [addAbout, addEducation, addWorkexperience]);
+  }, [addWorkexperience]);
 
   return (
     <>
