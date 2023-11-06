@@ -9,7 +9,6 @@ const CreateAccount = () => {
   const handleCreateUser = async () => {
     try {
       const body = { username: username, password: password };
-      console.log('body', body);
 
       const response = await fetch('/api/createUser', {
         method: 'POST',
@@ -18,8 +17,6 @@ const CreateAccount = () => {
         },
         body: JSON.stringify(body),
       });
-
-      console.log('response', response);
 
       const data = await response.json();
       console.log('data', data);
@@ -39,13 +36,18 @@ const CreateAccount = () => {
           handleCreateUser();
         }}
       >
+        <h1>Skapa konto</h1>
         <label htmlFor="username">Användarnamn:</label>
         <input type="text" id="username" value={username} onChange={(e) => setUsername(e.target.value)} />
         <label htmlFor="password">Lösenord:</label>
         <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        <button type="submit">Skapa konto</button>
+        <button type="submit" className="primary-btn" disabled={username.length < 1 || password.length < 1}>
+          Skapa konto
+        </button>{' '}
+        <button onClick={router.back} className="secondary-btn account-btn">
+          Gå tillbaka
+        </button>
       </form>
-      <button onClick={router.back}>Gå tillbaka</button>
     </>
   );
 };
