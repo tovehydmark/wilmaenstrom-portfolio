@@ -52,7 +52,11 @@ const Login = () => {
         <label htmlFor="password">Lösenord:</label>
         <input type="password" id="password" name="password" value={formData.password} onChange={handleInputChange} />
         {errorMessage && <div className="error-message">{errorMessage}</div>}
-        <button type="submit" className="primary-btn">
+        <button
+          type="submit"
+          className="primary-btn"
+          disabled={formData.username.length < 1 || formData.password.length < 1}
+        >
           Logga in
         </button>{' '}
         <button className="secondary-btn account-btn" onClick={() => router.push('/admin/createAccount')}>
