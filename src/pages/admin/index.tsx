@@ -46,14 +46,23 @@ const Login = () => {
   return (
     <>
       <form className="admin-login-section" onSubmit={handleLogin}>
+        <h1>Logga in</h1>
         <label htmlFor="username">Användarnamn:</label>
         <input type="text" id="username" name="username" value={formData.username} onChange={handleInputChange} />
         <label htmlFor="password">Lösenord:</label>
         <input type="password" id="password" name="password" value={formData.password} onChange={handleInputChange} />
         {errorMessage && <div className="error-message">{errorMessage}</div>}
-        <button type="submit">Logga in</button>
+        <button
+          type="submit"
+          className="primary-btn"
+          disabled={formData.username.length < 1 || formData.password.length < 1}
+        >
+          Logga in
+        </button>{' '}
+        <button className="secondary-btn account-btn" onClick={() => router.push('/admin/createAccount')}>
+          Skapa konto
+        </button>
       </form>
-      <Link href="/admin/createAccount">Skapa konto</Link>
     </>
   );
 };
