@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { signIn, useSession } from 'next-auth/react';
 
 const Login = () => {
   const router = useRouter();
+  const { data: session } = useSession();
+
   const [errorMessage, setErrorMessage] = useState('');
   const [formData, setFormData] = useState({
     username: '',
@@ -20,6 +22,17 @@ const Login = () => {
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const res = await signIn('credentials', {
+      inputValue: formData.username,
+      password: formData.password,
+      redirect: false,
+      callbackUrl: '/admin/dashboard',
+    });
+
+    if (res?.error) {
+      const errorMessage = 'Användarnamnet eller lösenordet stämmer inte';
+    }
 
     try {
       const response = await fetch('/api/login', {
