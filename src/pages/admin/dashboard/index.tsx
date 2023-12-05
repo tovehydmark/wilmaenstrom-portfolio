@@ -2,6 +2,7 @@ import { ImageDocument } from '@/app/api/models/Image';
 import ImageUploadForm from '@/app/components/ImageUploadForm';
 import PortfolioImage from '@/app/components/PortfolioImage';
 import SideMenu from '@/app/components/admin/SideMenu';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
@@ -10,6 +11,7 @@ const Dashboard = () => {
   const [images, setImages] = useState<ImageDocument[]>();
   const [uploadedNewImage, setUploadedNewImage] = useState<boolean>(false);
   const router = useRouter();
+  const session = useSession();
 
   const checkIfUserIsAuthenticated = () => {
     const token = localStorage.getItem('authToken');
@@ -32,6 +34,8 @@ const Dashboard = () => {
       router.push('/admin');
     }
   }, [router]);
+
+  console.log('session', session);
 
   useEffect(() => {
     (async () => {
