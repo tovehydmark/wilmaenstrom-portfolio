@@ -89,8 +89,16 @@ const UserInfo = () => {
         <>
           <section className="about-container">
             <SideMenu></SideMenu>
+            <h1>Information om dig</h1>
 
-            <h1>Om mig</h1>
+            <p>
+              På denna sida kan du uppdatera bilden i din header samt den information om dig som du vill presentera på
+              din hemsida.
+            </p>
+            <h2>Headerbild</h2>
+
+            <button>Ladda upp/uppdatera bild</button>
+            <h2>Om mig</h2>
 
             {addAbout ? <AboutCard aboutInfo={about} onSave={() => setAddAbout(false)}></AboutCard> : <></>}
             {about && !addAbout ? <p>{about}</p> : <></>}
