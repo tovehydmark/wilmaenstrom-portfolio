@@ -4,6 +4,7 @@ import { WorkexperienceDocument } from '@/app/api/models/workexperience';
 import SideMenu from '@/app/components/admin/SideMenu';
 import AboutCard from '@/app/components/admin/about/AboutCard';
 import EducationCard from '@/app/components/admin/about/EducationCard';
+import HeaderImageCard from '@/app/components/admin/about/HeaderImageCard';
 import WorkexperienceCard from '@/app/components/admin/about/WorkexperienceCard';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
@@ -11,9 +12,11 @@ import React, { useEffect, useState } from 'react';
 const UserInfo = () => {
   const [userIsAuthenticated, setUserIsAuthenticated] = useState(false);
   const router = useRouter();
+  const [addHeader, setAddHeader] = useState(false);
   const [addAbout, setAddAbout] = useState(false);
   const [addEducation, setAddEducation] = useState(false);
   const [addWorkexperience, setAddWorkexperience] = useState(false);
+  const [header, setHeader] = useState<string>('');
   const [about, setAbout] = useState<string>('');
   const [education, setEducation] = useState<EducationDocument[]>();
   const [workexperience, setWorkexperience] = useState<WorkexperienceDocument[]>();
@@ -39,6 +42,23 @@ const UserInfo = () => {
       router.push('/admin');
     }
   }, [router]);
+
+  useEffect(() => {
+    (async () => {
+      //Get header data
+      try {
+        const response = await fetch('/api/userinfo/getHeaderImage');
+        const data: any = await response.json();
+
+        //ÄNDRA
+        if (data.about.description) {
+          setHeader(data.about.description);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, [header]);
 
   useEffect(() => {
     (async () => {
@@ -95,9 +115,20 @@ const UserInfo = () => {
               På denna sida kan du uppdatera bilden i din header samt den information om dig som du vill presentera på
               din hemsida.
             </p>
-            <h2>Headerbild</h2>
+            <hr />
 
-            <button>Ladda upp/uppdatera bild</button>
+            <h2>Headerbild</h2>
+            <p>Gör din sida mer personlig genom att ladda upp en bild till din header.</p>
+            {addHeader ? <HeaderImageCard image={image} onSave={() => setAddHeader(false)}></HeaderImageCard> : <></>}
+
+            <button
+              onClick={() => setAddHeader(!addHeader)}
+              className={!addHeader ? 'primary-btn center' : 'secondary-btn center'}
+            >
+              {!addHeader ? 'Redigera' : 'Avbryt'}
+            </button>
+            <hr />
+
             <h2>Om mig</h2>
 
             {addAbout ? <AboutCard aboutInfo={about} onSave={() => setAddAbout(false)}></AboutCard> : <></>}
@@ -108,6 +139,7 @@ const UserInfo = () => {
             >
               {!addAbout ? 'Redigera' : 'Avbryt'}
             </button>
+
             <hr />
             <h2>Utbildning</h2>
             <button
