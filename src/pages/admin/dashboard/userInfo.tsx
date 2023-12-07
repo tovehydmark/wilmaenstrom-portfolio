@@ -119,7 +119,7 @@ const UserInfo = () => {
 
             <h2>Headerbild</h2>
             <p>Gör din sida mer personlig genom att ladda upp en bild till din header.</p>
-            {addHeader ? <HeaderImageCard image={image} onSave={() => setAddHeader(false)}></HeaderImageCard> : <></>}
+            {addHeader ? <HeaderImageCard image={header} onSave={() => setAddHeader(false)}></HeaderImageCard> : <></>}
 
             <button
               onClick={() => setAddHeader(!addHeader)}
