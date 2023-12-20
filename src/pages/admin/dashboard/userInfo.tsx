@@ -16,7 +16,6 @@ const UserInfo = () => {
   const [addAbout, setAddAbout] = useState(false);
   const [addEducation, setAddEducation] = useState(false);
   const [addWorkexperience, setAddWorkexperience] = useState(false);
-  const [header, setHeader] = useState<string>('');
   const [about, setAbout] = useState<string>('');
   const [education, setEducation] = useState<EducationDocument[]>();
   const [workexperience, setWorkexperience] = useState<WorkexperienceDocument[]>();
@@ -42,23 +41,6 @@ const UserInfo = () => {
       router.push('/admin');
     }
   }, [router]);
-
-  useEffect(() => {
-    (async () => {
-      //Get header data
-      try {
-        const response = await fetch('/api/userinfo/getHeaderImage');
-        const data: any = await response.json();
-
-        //ÄNDRA
-        if (data.about.description) {
-          setHeader(data.about.description);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, [header]);
 
   useEffect(() => {
     (async () => {
@@ -119,7 +101,7 @@ const UserInfo = () => {
 
             <h2>Headerbild</h2>
             <p>Gör din sida mer personlig genom att ladda upp en bild till din header.</p>
-            {addHeader ? <HeaderImageCard image={header} onSave={() => setAddHeader(false)}></HeaderImageCard> : <></>}
+            {addHeader ? <HeaderImageCard onSave={() => setAddHeader(false)}></HeaderImageCard> : <></>}
 
             <button
               onClick={() => setAddHeader(!addHeader)}
