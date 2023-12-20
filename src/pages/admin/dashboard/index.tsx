@@ -66,7 +66,10 @@ const Dashboard = () => {
             <section className="admin-upload-image-section">
               <h2>Ladda upp ny bild</h2>
 
-              <ImageUploadForm onSave={() => setUploadedNewImage(!uploadedNewImage)}></ImageUploadForm>
+              <ImageUploadForm
+                apiString={'postImageToAzure'}
+                onSave={() => setUploadedNewImage(!uploadedNewImage)}
+              ></ImageUploadForm>
             </section>
             <hr />
             <section className="admin-gallery">

@@ -5,7 +5,7 @@ interface ImageDocument {
   type: string;
 }
 
-const ImageUploadForm = ({ onSave }) => {
+const ImageUploadForm = ({ onSave, apiString }) => {
   const [image, setImage] = useState<any>(null);
   const [imageInfo, setImageInfo] = useState<ImageDocument>();
   const [imageDescription, setImageDescription] = useState('');
@@ -35,7 +35,7 @@ const ImageUploadForm = ({ onSave }) => {
           imageName: imageInfo.name,
         };
 
-        const response = await fetch('/api/postImageToAzure', {
+        const response = await fetch('/api/' + apiString, {
           method: 'POST',
           body: image,
           headers: headers,
