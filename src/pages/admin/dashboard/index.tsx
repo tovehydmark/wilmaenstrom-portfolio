@@ -69,6 +69,7 @@ const Dashboard = () => {
               <ImageUploadForm
                 apiString={'postImageToAzure'}
                 onSave={() => setUploadedNewImage(!uploadedNewImage)}
+                isHeader={false}
               ></ImageUploadForm>
             </section>
             <hr />
