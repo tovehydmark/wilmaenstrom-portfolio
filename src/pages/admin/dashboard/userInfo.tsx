@@ -4,6 +4,7 @@ import { WorkexperienceDocument } from '@/app/api/models/workexperience';
 import SideMenu from '@/app/components/admin/SideMenu';
 import AboutCard from '@/app/components/admin/about/AboutCard';
 import EducationCard from '@/app/components/admin/about/EducationCard';
+import HeaderImageCard from '@/app/components/admin/about/HeaderImageCard';
 import WorkexperienceCard from '@/app/components/admin/about/WorkexperienceCard';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
@@ -11,6 +12,7 @@ import React, { useEffect, useState } from 'react';
 const UserInfo = () => {
   const [userIsAuthenticated, setUserIsAuthenticated] = useState(false);
   const router = useRouter();
+  const [addHeader, setAddHeader] = useState(false);
   const [addAbout, setAddAbout] = useState(false);
   const [addEducation, setAddEducation] = useState(false);
   const [addWorkexperience, setAddWorkexperience] = useState(false);
@@ -89,8 +91,27 @@ const UserInfo = () => {
         <>
           <section className="about-container">
             <SideMenu></SideMenu>
+            <h1>Information om dig</h1>
 
-            <h1>Om mig</h1>
+            <p>
+              På denna sida kan du uppdatera bilden i din header samt den information om dig som du vill presentera på
+              din hemsida.
+            </p>
+            <hr />
+
+            <h2>Headerbild</h2>
+            <p>Gör din sida mer personlig genom att ladda upp en bild till din header.</p>
+            {addHeader ? <HeaderImageCard onSave={() => setAddHeader(false)}></HeaderImageCard> : <></>}
+
+            <button
+              onClick={() => setAddHeader(!addHeader)}
+              className={!addHeader ? 'primary-btn center' : 'secondary-btn center'}
+            >
+              {!addHeader ? 'Redigera' : 'Avbryt'}
+            </button>
+            <hr />
+
+            <h2>Om mig</h2>
 
             {addAbout ? <AboutCard aboutInfo={about} onSave={() => setAddAbout(false)}></AboutCard> : <></>}
             {about && !addAbout ? <p>{about}</p> : <></>}
@@ -100,6 +121,7 @@ const UserInfo = () => {
             >
               {!addAbout ? 'Redigera' : 'Avbryt'}
             </button>
+
             <hr />
             <h2>Utbildning</h2>
             <button

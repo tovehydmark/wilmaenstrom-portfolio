@@ -5,11 +5,12 @@ interface ImageDocument {
   type: string;
 }
 
-const ImageUploadForm = ({ onSave }) => {
+const ImageUploadForm = ({ onSave, apiString, isHeader }) => {
   const [image, setImage] = useState<any>(null);
   const [imageInfo, setImageInfo] = useState<ImageDocument>();
   const [imageDescription, setImageDescription] = useState('');
   const [imageIsSelected, setImageIsSelected] = useState(false);
+  const [apiRoute, setApiRoute] = useState(isHeader ? 'postHeaderImageToMongoDB' : 'postImageInfoToMongoDB');
 
   const handleSubmit = (e: React.ChangeEvent<HTMLInputElement>) => {
     const reader = new FileReader();
@@ -35,7 +36,7 @@ const ImageUploadForm = ({ onSave }) => {
           imageName: imageInfo.name,
         };
 
-        const response = await fetch('/api/postImageToAzure', {
+        const response = await fetch('/api/' + apiString, {
           method: 'POST',
           body: image,
           headers: headers,
@@ -47,7 +48,7 @@ const ImageUploadForm = ({ onSave }) => {
           const imageData = await response.json();
 
           try {
-            const responseFromMongoDB = await fetch('/api/postImageInfoToMongoDB', {
+            const responseFromMongoDB = await fetch('/api/' + apiRoute, {
               method: 'POST',
               body: JSON.stringify({
                 imageData: imageData,
@@ -89,15 +90,24 @@ const ImageUploadForm = ({ onSave }) => {
           <input id="file-upload" type="file" accept="image/*" onChange={handleSubmit} />
           {imageIsSelected ? (
             <>
-              <label className="image-description-label" htmlFor="textarea">
-                Skriv en bildtext
-              </label>
-              <textarea
-                onChange={(e) => setImageDescription(e.target.value)}
-                className="image-description-textarea"
-                id="textarea"
-              />
-              <button onClick={uploadImage} disabled={imageDescription.length < 1} className="primary-btn">
+              {!isHeader ? (
+                <>
+                  <label className="image-description-label" htmlFor="textarea">
+                    Skriv en bildtext
+                  </label>
+                  <textarea
+                    onChange={(e) => setImageDescription(e.target.value)}
+                    className="image-description-textarea"
+                    id="textarea"
+                  />
+                </>
+              ) : null}
+
+              <button
+                onClick={uploadImage}
+                disabled={!isHeader ? imageDescription.length < 1 : undefined}
+                className="primary-btn"
+              >
                 Ladda upp bild
               </button>
             </>

@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import azureStorage from '../../app/lib/azureConnection';
 
-const containerName = process.env.AZURE_CONTAINERNAME;
+const containerName = process.env.AZURE_CONTAINERNAME_HEADERIMG;
 
 export const config = {
   api: {
@@ -12,7 +12,7 @@ export const config = {
   maxDuration: 5,
 };
 
-export default async function postImageToAzure(req: NextApiRequest, res: NextApiResponse) {
+export default async function postHeaderImageToAzure(req: NextApiRequest, res: NextApiResponse) {
   try {
     const fileBuffer = Buffer.from(req.body.replace(/^data:image\/\w+;base64,/, ''), 'base64');
     const fileName = req.headers.imagename;

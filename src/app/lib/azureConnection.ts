@@ -2,9 +2,13 @@ import { BlobDeleteOptions, BlobServiceClient } from '@azure/storage-blob';
 
 const connectionString = process.env.AZURE_CONNECTION;
 const blobServiceClient = BlobServiceClient.fromConnectionString(connectionString as string);
-const containerName = process.env.AZURE_CONTAINERNAME;
 
-async function uploadImageToAzureStorage(fileBuffer: Buffer, fileName: string, contentType: string) {
+async function uploadImageToAzureStorage(
+  fileBuffer: Buffer,
+  fileName: string,
+  contentType: string,
+  containerName: any,
+) {
   const containerClient = blobServiceClient.getContainerClient(containerName as string);
   const blockBlobClient = containerClient.getBlockBlobClient(fileName);
 
@@ -28,7 +32,7 @@ async function uploadImageToAzureStorage(fileBuffer: Buffer, fileName: string, c
   }
 }
 
-async function deleteImageFromAzure(fileName: string) {
+async function deleteImageFromAzure(fileName: string, containerName: string | undefined) {
   const options: BlobDeleteOptions = {
     deleteSnapshots: 'include',
   };
@@ -53,7 +57,7 @@ async function deleteImageFromAzure(fileName: string) {
   }
 }
 
-async function getImageUrlFromAzureStorage(fileName: string) {
+async function getImageUrlFromAzureStorage(fileName: string, containerName: string | undefined) {
   const containerClient = blobServiceClient.getContainerClient(containerName as string);
   const blockBlobClient = containerClient.getBlockBlobClient(fileName);
 
