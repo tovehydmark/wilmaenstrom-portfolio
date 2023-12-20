@@ -17,9 +17,7 @@ const Header = () => {
         console.log(error);
       }
     })();
-  }, [headerImage]); // Dependency array should contain headerImage
-
-  console.log(headerImage);
+  }, [headerImage]);
 
   return (
     <>
