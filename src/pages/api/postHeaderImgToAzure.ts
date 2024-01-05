@@ -15,7 +15,9 @@ export const config = {
 export default async function postHeaderImageToAzure(req: NextApiRequest, res: NextApiResponse) {
   try {
     const fileBuffer = Buffer.from(req.body.replace(/^data:image\/\w+;base64,/, ''), 'base64');
-    const fileName = req.headers.imagename;
+
+    const fileName = 'headerImage';
+
     const imageUrl = await azureStorage.uploadImageToAzureStorage(
       fileBuffer,
       fileName,

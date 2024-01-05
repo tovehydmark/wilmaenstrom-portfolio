@@ -1,6 +1,5 @@
 import clientPromise from '@/app/lib/mongodb';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { ImageModel } from '@/app/api/models';
 
 export async function postHeaderImageToMongoDB(req: NextApiRequest, res: NextApiResponse) {
   const { imageUrl, fileName } = req.body.imageData;
@@ -8,17 +7,17 @@ export async function postHeaderImageToMongoDB(req: NextApiRequest, res: NextApi
   const db = client.db('wilma-portfolio');
 
   try {
-    let newImage = new ImageModel();
-    newImage.imageUrl = imageUrl;
-    newImage.fileName = fileName;
+    const filter = {};
+    const update = { $set: { imageUrl: imageUrl, fileName: fileName } };
+    const options = { upsert: true }; // Creates a new document if none exists
 
-    const image = await db.collection('headerImg').insertOne(newImage);
+    const result = await db.collection('headerImg').findOneAndUpdate(filter, update, options);
 
-    res.status(201).send({ data: image });
+    res.status(200).send({ data: result });
   } catch (error) {
     console.log('error', error);
 
-    res.status(401).send({ error: error });
+    res.status(500).send({ error: error });
   }
 }
 

@@ -13,13 +13,6 @@ async function uploadImageToAzureStorage(
   const blockBlobClient = containerClient.getBlockBlobClient(fileName);
 
   try {
-    // Check if a blob with the same name already exists
-    const blobExists = await blockBlobClient.exists();
-
-    if (blobExists) {
-      throw new Error('File with the same name already exists.');
-    }
-
     // If the blob doesn't exist, proceed with the upload
     await blockBlobClient.uploadData(fileBuffer, {
       blobHTTPHeaders: { blobContentType: contentType },
