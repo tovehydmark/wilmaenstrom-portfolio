@@ -9,8 +9,11 @@ const Header = () => {
       try {
         const response = await fetch('/api/userinfo/getHeaderImage');
         const data = await response.json();
+        console.log('data.image.imageUrl', data.image.imageUrl);
 
         if (data && data.image) {
+          console.log('rgwe');
+
           setHeaderImage(data.image.imageUrl);
         }
       } catch (error) {
@@ -21,7 +24,14 @@ const Header = () => {
 
   return (
     <>
-      <header style={{ backgroundImage: `url('${headerImage}')` }}>
+      <header
+        style={{
+          backgroundImage: `url('${headerImage}')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'left',
+          height: '250px',
+        }}
+      >
         <div className="header-name-container">
           <div>
             <h1>Wilma Enström</h1>
