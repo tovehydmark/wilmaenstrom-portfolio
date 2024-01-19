@@ -12,8 +12,6 @@ const Header = () => {
         console.log('data.image.imageUrl', data.image.imageUrl);
 
         if (data && data.image) {
-          console.log('rgwe');
-
           setHeaderImage(data.image.imageUrl);
         }
       } catch (error) {
