@@ -32,8 +32,6 @@ const Contact = () => {
           <p>wilmaenstrom@gmail.com</p>
           <br />
           <p>+4670 7770 7070</p>
-
-          {contactInfo ? 'KONTAKTINFO SKA PRINTAS HÄR' : null}
         </section>
       </Layout>
     </>
