@@ -1,6 +1,24 @@
+import { ContactDocument } from '@/app/api/models/contact';
 import Layout from '@/app/components/layout';
+import { useEffect, useState } from 'react';
 
 const Contact = () => {
+  const [contactInfo, setContactInfo] = useState<ContactDocument>();
+
+  useEffect(() => {
+    (async () => {
+      //Get contact data
+      try {
+        const response = await fetch('/api/userinfo/getContactInfo');
+        const data: any = await response.json();
+
+        setContactInfo(data.about);
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
+
   return (
     <>
       <Layout>
@@ -14,6 +32,8 @@ const Contact = () => {
           <p>wilmaenstrom@gmail.com</p>
           <br />
           <p>+4670 7770 7070</p>
+
+          {contactInfo ? 'KONTAKTINFO SKA PRINTAS HÄR' : null}
         </section>
       </Layout>
     </>
