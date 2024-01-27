@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-const ContactCard = ({ onSave }) => {
-  const [description, setDescription] = useState<string>('');
-  const [phone, setPhone] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
+const ContactCard = ({ descriptionProp, phoneProp, emailProp, onSave }) => {
+  const [description, setDescription] = useState<string>(descriptionProp ? descriptionProp : '');
+  const [phone, setPhone] = useState<string>(phoneProp ? phoneProp : '');
+  const [email, setEmail] = useState<string>(emailProp ? emailProp : '');
   const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
