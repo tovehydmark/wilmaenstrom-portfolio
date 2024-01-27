@@ -19,17 +19,13 @@ const Contact = () => {
     })();
   }, []);
 
-  console.log(contactInfo);
-
   return (
     <>
       <Layout>
         <section className="contact-container">
           <h1>Kontakt</h1>
           <p>{contactInfo?.description}</p>
-          <br />
           <p>{contactInfo?.email}</p>
-          <br />
           <p>{contactInfo?.phone}</p>
         </section>
       </Layout>
