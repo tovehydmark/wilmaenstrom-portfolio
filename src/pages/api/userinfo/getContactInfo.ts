@@ -10,7 +10,6 @@ export async function getContactInfo(req: NextApiRequest, res: NextApiResponse) 
 
     const contactCollection = db.collection<ContactDocument>('contact');
 
-    //TODO: Check this qurey
     const contact = await contactCollection.findOne();
 
     if (!contact) {

@@ -9,15 +9,26 @@ export async function postContactInfo(req: NextApiRequest, res: NextApiResponse)
 
   try {
     let newContact = new ContactModel();
-
     newContact.description = description;
     newContact.phone = phone;
     newContact.email = email;
 
-    //TODO: Update this so that it writes over instead of pushing in a new
-    const contact = await db.collection('contact').insertOne(newContact);
+    // Kontrollera om det redan finns en "contact" post i databasen
 
-    res.status(201).send({ data: contact });
+    const existingContactInfo = await db.collection('contact').findOne();
+
+    if (existingContactInfo) {
+      // Om det finns en post, uppdatera den
+
+      await db.collection('contact').updateOne({}, { $set: { description, phone, email } });
+      res.status(200).send({ data: 'Informationen har uppdaterats' });
+    } else {
+      // Om det inte finns någon contact-post, skapa en ny
+
+      const contact = await db.collection('contact').insertOne(newContact);
+
+      res.status(201).send({ data: contact });
+    }
   } catch (error) {
     console.log('error', error);
 
