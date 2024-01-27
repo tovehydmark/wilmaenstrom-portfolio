@@ -70,7 +70,16 @@ const ContactInfo = () => {
             {!addContactData ? 'Redigera' : 'Avbryt'}
           </button>
 
-          {addContactData ? <ContactCard onSave={() => addContactData(false)}></ContactCard> : <></>}
+          {addContactData ? (
+            <ContactCard
+              descriptionProp={description}
+              phoneProp={phone}
+              emailProp={email}
+              onSave={() => setAddContactData(false)}
+            ></ContactCard>
+          ) : (
+            <></>
+          )}
           <hr />
         </>
       ) : (
