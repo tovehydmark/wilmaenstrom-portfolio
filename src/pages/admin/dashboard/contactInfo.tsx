@@ -62,7 +62,18 @@ const ContactInfo = () => {
         <>
           <SideMenu></SideMenu>
           <h2>Kontakt</h2>
-          <p>Det är bra med kontaktuppgifter om någon vill kontakta dig</p>
+          <p>
+            Det är bra med kontaktuppgifter om någon vill kontakta dig. Här kan du skriva ett meddelande som du vill att
+            dina besökare ser. Och lägga till kontaktuppgifter såklart.
+          </p>
+
+          <h3>Meddelande</h3>
+          <p>{description}</p>
+          <h3>Telefonnummer</h3>
+          <p>{phone}</p>
+          <h3>Email</h3>
+          <p>{email}</p>
+
           <button
             onClick={() => setAddContactData(!addContactData)}
             className={!addContactData ? 'primary-btn center' : 'secondary-btn center'}
