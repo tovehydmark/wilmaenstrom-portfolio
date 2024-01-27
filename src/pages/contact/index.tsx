@@ -12,26 +12,25 @@ const Contact = () => {
         const response = await fetch('/api/userinfo/getContactInfo');
         const data: any = await response.json();
 
-        setContactInfo(data.about);
+        setContactInfo(data.contact);
       } catch (error) {
         console.log(error);
       }
     })();
   }, []);
 
+  console.log(contactInfo);
+
   return (
     <>
       <Layout>
         <section className="contact-container">
           <h1>Kontakt</h1>
-          <p>
-            Om du är intresserad av att anställa mig på ditt företag eller köpa min konst, var god och hör av dig till
-            mig, för hur ska jag annars veta?? Jag är väl fan inte tankeläsare!
-          </p>
+          <p>{contactInfo?.description}</p>
           <br />
-          <p>wilmaenstrom@gmail.com</p>
+          <p>{contactInfo?.email}</p>
           <br />
-          <p>+4670 7770 7070</p>
+          <p>{contactInfo?.phone}</p>
         </section>
       </Layout>
     </>
