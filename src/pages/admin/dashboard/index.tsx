@@ -35,7 +35,6 @@ const Dashboard = () => {
     }
   }, [router]);
 
-  console.log('session', session);
 
   useEffect(() => {
     (async () => {
