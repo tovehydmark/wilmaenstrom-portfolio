@@ -14,7 +14,7 @@ header {
     margin: 0 auto;
 
     div {
-      background-color: rgb(146, 160, 179);
+      background-color: #536a74;
       border-top: 1px solid rgb(255, 255, 255);
       border-bottom: 1px solid rgb(255, 255, 255);
       padding: 1rem;
@@ -58,11 +58,11 @@ hr {
   border-radius: 15px;
   border: none;
   color: white;
-  background-color: #161429;
+  background-color: #212a2e;
 }
 .primary-btn:hover {
   cursor: pointer;
-  background-color: #1f1d33;
+  background-color: #3c4c54;
 }
 .primary-btn:disabled {
   cursor: auto;
@@ -470,15 +470,15 @@ footer {
   height: 100px;
   margin: 0 auto;
   text-align: center;
-  border-top: 2px solid #92a0b3;
-  border-bottom: 2px solid #92a0b3;
+  border-top: 1px solid #8b8b8b;
+  border-bottom: 0.1px solid #8b8b8b;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 1rem;
   max-width: 1300px;
-  background-color: #798390;
+  background-color: #afa5a0;
   color: white;
   div {
     display: flex;
