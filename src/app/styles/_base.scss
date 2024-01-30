@@ -58,15 +58,16 @@ hr {
   border-radius: 15px;
   border: none;
   color: white;
-  background-color: #171717;
+  background-color: #161429;
 }
 .primary-btn:hover {
   cursor: pointer;
+  background-color: #1f1d33;
 }
 .primary-btn:disabled {
   cursor: auto;
-  background-color: #9a9a9a;
-  color: rgb(211, 210, 210);
+  background-color: rgba(211, 210, 210, 0.52);
+  color: #404040;
 }
 
 .secondary-btn {
@@ -78,6 +79,16 @@ hr {
 }
 .secondary-btn:hover {
   cursor: pointer;
+}
+
+.tetithary-btn {
+  margin: 0 auto;
+  color: #ffffff;
+  margin-top: 1rem;
+}
+
+.tetithary-btn:visited {
+  color: #ffffff;
 }
 
 .icon-btn {
@@ -249,8 +260,9 @@ hr {
 .admin-login-section {
   display: flex;
   flex-direction: column;
-  margin: 4rem auto 0;
   max-width: 400px;
+  padding: 2rem 10% 0;
+  margin: 0 auto;
   h1 {
     text-align: center;
     margin-bottom: 2rem;
@@ -259,11 +271,13 @@ hr {
     padding: 0.5rem;
     margin-bottom: 1rem;
     margin-top: 0.5rem;
-    border: 1px solid black;
-    border-radius: 7px;
+    border-radius: 10px;
+    border: none;
   }
   button {
     width: 100%;
+    border-radius: 20px;
+    margin-top: 1rem;
   }
   .account-btn {
     width: 100%;

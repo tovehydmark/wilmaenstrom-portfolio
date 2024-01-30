@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Router, useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -44,9 +45,9 @@ const CreateAccount = () => {
         <button type="submit" className="primary-btn" disabled={username.length < 1 || password.length < 1}>
           Skapa konto
         </button>{' '}
-        <button onClick={router.back} className="secondary-btn account-btn">
+        <Link href={'/admin'} className="tetithary-btn">
           Gå tillbaka
-        </button>
+        </Link>
       </form>
     </>
   );
