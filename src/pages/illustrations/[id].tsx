@@ -84,7 +84,10 @@ export default function SelctedImage({ data }) {
               style={{
                 objectFit: 'contain',
               }}
-            ></Image>
+            ></Image>{' '}
+            <article className="selected-image-info">
+              <p>{imageDescription}</p>
+            </article>
             <div className="buttons-layout-selected-image-display">
               <button onClick={handlePrevious} disabled={disablePreviousButton}>
                 <FontAwesomeIcon icon={faAngleLeft} />
@@ -93,9 +96,6 @@ export default function SelctedImage({ data }) {
                 <FontAwesomeIcon icon={faAngleRight} />
               </button>
             </div>
-            <article className="selected-image-info">
-              <p>{imageDescription}</p>
-            </article>
           </div>
         ) : null}
       </div>
