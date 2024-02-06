@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { signIn, useSession } from 'next-auth/react';
+import Link from 'next/link';
 
 const Login = () => {
   const router = useRouter();
@@ -72,9 +73,9 @@ const Login = () => {
         >
           Logga in
         </button>{' '}
-        <button className="secondary-btn account-btn" onClick={() => router.push('/admin/createAccount')}>
+        <Link className="tetithary-btn" href={'/admin/createAccount'}>
           Skapa konto
-        </button>
+        </Link>
       </form>
     </>
   );
