@@ -59,28 +59,29 @@ const ContactInfo = () => {
   return (
     <>
       {userIsAuthenticated ? (
-        <>
+        <section className="about-container">
           <SideMenu></SideMenu>
-          <h2>Kontakt</h2>
+          <h1>Kontakt</h1>
           <p>
             Det är bra med kontaktuppgifter om någon vill kontakta dig. Här kan du skriva ett meddelande som du vill att
             dina besökare ser. Och lägga till kontaktuppgifter såklart.
           </p>
+          <hr />
 
-          <h3>Meddelande</h3>
+          <h2>Meddelande</h2>
           <p>{description}</p>
-          <h3>Telefonnummer</h3>
+          <br />
+          <h2>Telefonnummer</h2>
           <p>{phone}</p>
-          <h3>Email</h3>
+          <br />
+          <h2>Email</h2>
           <p>{email}</p>
-
           <button
             onClick={() => setAddContactData(!addContactData)}
             className={!addContactData ? 'primary-btn center' : 'secondary-btn center'}
           >
             {!addContactData ? 'Redigera' : 'Avbryt'}
           </button>
-
           {addContactData ? (
             <ContactCard
               descriptionProp={description}
@@ -92,7 +93,7 @@ const ContactInfo = () => {
             <></>
           )}
           <hr />
-        </>
+        </section>
       ) : (
         <div>Loading...</div>
       )}
