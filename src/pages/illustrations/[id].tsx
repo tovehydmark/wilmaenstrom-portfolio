@@ -74,8 +74,8 @@ export default function SelctedImage({ data }) {
         <button className="close-selected-image-view">
           <FontAwesomeIcon icon={faX} size="xl" onClick={exitSelectedImageView} />
         </button>
-        <div>
-          {image ? (
+        {image ? (
+          <div className="selected-img-container">
             <Image
               className="selected-image"
               src={image.imageUrl}
@@ -84,22 +84,20 @@ export default function SelctedImage({ data }) {
               style={{
                 objectFit: 'contain',
               }}
-            ></Image>
-          ) : (
-            ''
-          )}
-          <div className="buttons-layout-selected-image-display">
-            <button onClick={handlePrevious} disabled={disablePreviousButton}>
-              <FontAwesomeIcon icon={faAngleLeft} />
-            </button>
-            <button onClick={handleNext} disabled={disableNextButton}>
-              <FontAwesomeIcon icon={faAngleRight} />
-            </button>
+            ></Image>{' '}
+            <article className="selected-image-info">
+              <p>{imageDescription}</p>
+            </article>
+            <div className="buttons-layout-selected-image-display">
+              <button onClick={handlePrevious} disabled={disablePreviousButton}>
+                <FontAwesomeIcon icon={faAngleLeft} />
+              </button>
+              <button onClick={handleNext} disabled={disableNextButton}>
+                <FontAwesomeIcon icon={faAngleRight} />
+              </button>
+            </div>
           </div>
-        </div>
-        <article className="selected-image-info">
-          <p>{imageDescription}</p>
-        </article>
+        ) : null}
       </div>
     </>
   );

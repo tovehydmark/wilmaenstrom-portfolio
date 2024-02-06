@@ -9,12 +9,17 @@ main {
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
 }
-.selected-image-display-page {
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-}
+
 .selected-image {
-  max-height: 70vh;
+  max-height: 60vh;
+}
+
+.selected-image-info {
+  margin-top: 3rem;
+}
+.selected-img-container {
+  max-width: 70%;
+  margin: 0 auto;
 }
 
 ////About////
@@ -67,7 +72,7 @@ main {
   font-size: 1.2rem;
   border-bottom: #000000 1px solid;
   border-top: #000000 1px solid;
-  padding: 0.5rem;
+  padding: 2rem;
   ul {
     list-style: none;
     display: flex;
@@ -76,7 +81,7 @@ main {
     justify-content: space-around;
     li {
       a {
-        color: #000000;
+        color: #ffffff;
       }
     }
   }
