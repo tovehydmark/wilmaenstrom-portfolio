@@ -137,16 +137,6 @@ hr {
   cursor: pointer;
 }
 
-////Display single image on click page////
-.selected-image-display-page {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-  width: 100%;
-  margin: 0 auto;
-  position: relative;
-  padding-top: 1rem;
-}
 .close-selected-image-view {
   position: absolute;
   top: 1rem;
@@ -158,10 +148,33 @@ hr {
     cursor: pointer;
   }
 }
+////Display single image on click page////
+.selected-image-display-page {
+  width: 90%;
+  margin: 0 auto;
+  position: relative;
+  height: 100vh;
+}
+
+.selected-img-container {
+  display: flex;
+  flex-direction: column;
+}
 
 .selected-image {
-  position: relative !important;
+  margin-top: 1rem;
+  display: flex;
   width: 100%;
+  min-height: fit-content;
+  height: 100%;
+  object-fit: none;
+  position: relative !important;
+}
+
+.selected-image-info {
+  display: flex;
+  width: 100%;
+  margin: 1rem auto 0;
 }
 
 .buttons-layout-selected-image-display {
@@ -173,6 +186,7 @@ hr {
     border: none;
     background-color: transparent;
     font-size: 1.5rem;
+    color: white;
   }
   button:hover {
     cursor: pointer;
